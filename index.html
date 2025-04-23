@@ -69,7 +69,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            font-family: 'Pacifico', cursive;
+            font-family: 'Inter', sans-serif;
         }
 
         .logo svg {
@@ -178,12 +178,17 @@
             transition: var(--transition);
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 120px;
         }
 
         .btn-primary:hover {
             background-color: #00c49c;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 230, 156, 0.2);
         }
 
         .btn-secondary {
@@ -198,12 +203,18 @@
             transition: var(--transition);
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-width: 120px;
         }
 
         .btn-secondary:hover {
             background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-1px);
         }
 
         .hero-focus {
@@ -358,9 +369,10 @@
             justify-content: center;
         }
 
-        .project-image i {
-            font-size: 2rem;
-            color: #4b5563;
+        .project-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .project-content {
@@ -522,80 +534,256 @@
         }
 
         .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .core-values {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .value-card {
-            background-color: rgba(31, 41, 55, 0.5);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .value-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .value-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .stats-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .stats-grid {
+        .about-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
         .stat-card {
             background-color: var(--card-bg);
-            border-radius: 8px;
             padding: 2rem;
-            text-align: center;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: var(--transition);
         }
 
-        .stat-icon {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            font-size: 2rem;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            color: var(--accent);
             margin-bottom: 0.5rem;
-            background: linear-gradient(to right, var(--accent), var(--secondary));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
         }
 
         .stat-label {
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            opacity: 0.85;
+            font-size: 0.9rem;
         }
 
-        .stat-description {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            line-height: 1.5;
+        .studio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .studio-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .studio-values {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .value-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .value-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .studio-team {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text);
+            opacity: 0.85;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .feature-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-details li {
+            margin-bottom: 0.5rem;
+            opacity: 0.85;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 0.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .about-content,
+            .studio-content,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card,
+            .team-member {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                gap: 2rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .contact-container {
@@ -868,6 +1056,19 @@
                 text-align: center;
             }
         }
+
+        @media (max-width: 768px) {
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                min-width: auto;
+                margin: 0.5rem 0;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
     </style>
 </head>
 <body>
@@ -930,118 +1131,150 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/api/placeholder/600/400" alt="SharpVision Game Screenshot">
+                <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="SharpVision Game Screenshot">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="about-container">
+            <h2 class="section-heading">About <span>Us</span></h2>
+            <p class="section-subheading">Our journey in creating exceptional gaming experiences</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2025, SharpVision Studios has quickly become a leading name in the ROBLOX development community. Our team of passionate developers, designers, and creators are dedicated to pushing the boundaries of what's possible in the gaming world.</p>
+                    <p>We believe in creating games that not only entertain but also inspire and engage players in meaningful ways. Our commitment to quality, innovation, and community-driven development sets us apart in the industry.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">2M+</div>
+                        <div class="stat-label">Players Worldwide</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Games Published</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">9.5/10</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="studio" class="reveal">
+        <div class="studio-container">
+            <h2 class="section-heading">Our <span>Studio</span></h2>
+            <p class="section-subheading">Meet the team behind the magic</p>
+            <div class="studio-content">
+                <div class="studio-values">
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3 class="value-title">Innovation</h3>
+                        <p>We constantly push boundaries and explore new possibilities in game development</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💎</div>
+                        <h3 class="value-title">Quality</h3>
+                        <p>Every game we create is crafted with attention to detail and player satisfaction</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">👥</div>
+                        <h3 class="value-title">Community</h3>
+                        <p>We value player feedback and actively involve our community in development</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🚀</div>
+                        <h3 class="value-title">Growth</h3>
+                        <p>Continuous learning and improvement are at the core of our philosophy</p>
+                    </div>
+                </div>
+                <div class="studio-team">
+                    <h3>Meet Our Team</h3>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="" alt="Lead Developer">
+                            </div>
+                            <h4></h4>
+                            <p>Lead Developer</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="" alt="Game Designer">
+                            </div>
+                            <h4></h4>
+                            <p>Game Designer</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-image">
+                                <img src="" alt="Art Director">
+                            </div>
+                            <h4></h4>
+                            <p>Art Director</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="featured" class="reveal">
         <div class="featured-container">
-            <h2 class="section-heading">Our Top <span>Projects</span></h2>
+            <h2 class="section-heading">Our <span>Projects</span></h2>
             <p class="section-subheading">Explore our featured work that pushes the boundaries of gaming experiences</p>
             <div class="scroll-container">
                 <div class="project-grid">
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="ri-image-line"></i>
+                            <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Strike Force">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title"></h3>
                             <p class="project-category"></p>
                             <div class="project-meta">
                                 <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
+                                <a href="https://www.roblox.com/games/123456789/Strike-Force" class="project-link">View Game</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="ri-image-line"></i>
+                            <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cyber Racer">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title"></h3>
                             <p class="project-category"></p>
                             <div class="project-meta">
                                 <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
+                                <a href="https://www.roblox.com/games/123456789/Cyber-Racer" class="project-link">View Game</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="ri-image-line"></i>
+                            <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pixel Kingdoms">
                         </div>
                         <div class="project-content">
                             <h3 class="project-title"></h3>
                             <p class="project-category"></p>
                             <div class="project-meta">
                                 <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
+                                <a href="https://www.roblox.com/games/123456789/Pixel-Kingdoms" class="project-link">View Game</a>
                             </div>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="ri-image-line"></i>
+                            <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sky Pirates">
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title"></h3>
-                            <p class="project-category"></p>
-                            <div class="project-meta">
+                            <h3 class="project-title"> </h3>
+                            <p class="project-category"> </p>
+                            <div class="project-meta"> 
                                 <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="ri-image-line"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title"></h3>
-                            <p class="project-category"></p>
-                            <div class="project-meta">
-                                <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="ri-image-line"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title"></h3>
-                            <p class="project-category"></p>
-                            <div class="project-meta">
-                                <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="ri-image-line"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title"></h3>
-                            <p class="project-category"></p>
-                            <div class="project-meta">
-                                <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="ri-image-line"></i>
-                        </div>
-                        <div class="project-content">
-                            <h3 class="project-title"></h3>
-                            <p class="project-category"></p>
-                            <div class="project-meta">
-                                <span class="project-date"></span>
-                                <a href="#" class="project-link">View Game</a>
+                                <a href="https://www.roblox.com/games/123456789/Sky-Pirates" class="project-link">View Game</a>
                             </div>
                         </div>
                     </div>
@@ -1058,7 +1291,6 @@
                 </div>
                 <h3 class="feature-title">Advanced Voice Chat</h3>
                 <p class="feature-description">Seamless communication with crystal clear voice chat integration</p>
-                <a href="#" class="feature-link">Learn More <i class="ri-arrow-right-line"></i></a>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1066,7 +1298,7 @@
                 </div>
                 <h3 class="feature-title">Combat Mechanics</h3>
                 <p class="feature-description">Realistic and responsive combat systems for immersive gameplay</p>
-                <a href="#" class="feature-link">Learn More <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1074,7 +1306,7 @@
                 </div>
                 <h3 class="feature-title">Immersive Gameplay</h3>
                 <p class="feature-description">Engaging game mechanics that keep players coming back for more</p>
-                <a href="#" class="feature-link">Learn More <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1082,7 +1314,7 @@
                 </div>
                 <h3 class="feature-title">Community-Driven</h3>
                 <p class="feature-description">Active community engagement and regular updates based on player feedback</p>
-                <a href="#" class="feature-link">Learn More <i class="ri-arrow-right-line"></i></a>
+                
             </div>
         </div>
     </section>
@@ -1116,24 +1348,7 @@
         </div>
     </section>
 
-    <section id="impact" class="reveal">
-        <div class="stats-container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Games Created</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2,000,000</div>
-                    <div class="stat-label">Total Players</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">81%</div>
-                    <div class="stat-label">Player Satisfaction</div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <section id="contact" class="reveal">
         <div class="contact-container">
@@ -1159,10 +1374,10 @@
             <div class="social-links">
                 <h3>Connect With Us</h3>
                 <div class="footer-social">
-                    <a href="#" class="social-link twitter">Twitter</a>
-                    <a href="#" class="social-link discord">Discord</a>
-                    <a href="#" class="social-link roblox">Roblox</a>
-                    <a href="#" class="social-link tiktok">TikTok</a>
+                    <a href="https://twitter.com/sharpvision" class="social-link twitter">Twitter</a>
+                    <a href="https://discord.gg/sharpvision" class="social-link discord">Discord</a>
+                    <a href="https://www.roblox.com/users/123456789/profile" class="social-link roblox">Roblox</a>
+                    <a href="https://www.tiktok.com/@sharpvision" class="social-link tiktok">TikTok</a>
                 </div>
             </div>
         </div>
@@ -1277,11 +1492,25 @@
         // Form submission handling
         const contactForm = document.getElementById('contact-form');
         
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Add your form submission logic here
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+            
+            const formData = new FormData(contactForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            try {
+                // Here you would typically send the data to your backend API
+                // For now, we'll just show a success message
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your message. Please try again.');
+            }
         });
     </script>
 </body>
