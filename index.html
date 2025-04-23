@@ -103,6 +103,7 @@
             width: 30px;
             height: 20px;
             cursor: pointer;
+            z-index: 1000;
         }
 
         .menu-toggle span {
@@ -1035,7 +1036,6 @@
 
             .menu-toggle {
                 display: flex;
-                z-index: 100;
             }
 
             .menu-toggle.active span:nth-child(1) {
@@ -1069,30 +1069,102 @@
                 align-items: stretch;
             }
         }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg);
+                padding: 2rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+                border-radius: 8px;
+            }
+
+            .hero {
+                padding-top: 100px;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .hero-heading {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                min-width: auto;
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
    
     <header>
-        <a class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
+        <a href="#" class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
             </svg>
-            SharpVision
+            SharpVision Studios
         </a>
         <nav>
-            <div class="menu-toggle">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#featured">Projects</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <ul>
-                <a href="#hero" class="nav-link">Home</a>
-                <a href="#studio" class="nav-link">Studio</a>
-                <a href="#featured" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </ul>
         </nav>
     </header>
 
@@ -1128,9 +1200,123 @@
                     <p class="hero-stats-text">Join over <strong>2 million</strong> satisfied players</p>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1581291515684-76319dfe3ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="SharpVision Game Screenshot">
-            </div>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .shuffle-container {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            top: 120px;
+        }
+        
+        .shuffle-container img {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 1s ease-in-out;
+            transform: translateX(100%);
+        }
+        
+        .shuffle-container img.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        
+        .shuffle-container img.prev {
+            opacity: 0.5;
+            transform: translateX(-30%);
+            z-index: 1;
+        }
+        
+        .shuffle-container img.next {
+            opacity: 0.5;
+            transform: translateX(30%);
+            z-index: 1;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    
+    <div class="shuffle-container" id="imageContainer">
+        <!-- Using placeholder images -->
+        <img src="https://i.postimg.cc/cCB5H6WP/Thumb2.webp" alt="Image 1" class="active">
+        <img src="https://i.postimg.cc/y8kvqLDM/image.webp" alt="Image 2" class="next">
+        <img src="https://i.postimg.cc/9f9b0zt1/image.webp" alt="Image 3">
+        <img src="https://i.postimg.cc/sX9JP8Lh/image.webp" alt="Image 4">
+        <img src="https://i.postimg.cc/CLK4DcsR/image.webp" alt="Image 5" class="prev">
+    </div>
+  
+    
+    <script>
+        const images = document.querySelectorAll('#imageContainer img');
+        let currentIndex = 0;
+        let shuffleInterval;
+        
+        // Function to show the image at the given index as active
+        function showImage(index) {
+            // Remove all classes from all images
+            images.forEach(img => {
+                img.classList.remove('active', 'prev', 'next');
+            });
+            
+            // Calculate previous and next indices
+            const prevIndex = (index - 1 + images.length) % images.length;
+            const nextIndex = (index + 1) % images.length;
+            
+            // Apply classes
+            images[index].classList.add('active');
+            images[prevIndex].classList.add('prev');
+            images[nextIndex].classList.add('next');
+        }
+        
+        // Function to advance to the next image
+        function advanceSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+        
+        // Initialize the shuffle automatically
+        function startShuffle() {
+            // Initialize with the first image and its neighbors
+            showImage(currentIndex);
+            
+            // Start automatic shuffling
+            shuffleInterval = setInterval(advanceSlide, 3000); // Change image every 3 seconds
+        }
+        
+        // Start automatic shuffling when page loads
+        window.addEventListener('load', startShuffle);
+        
+        // Pause button
+        document.getElementById('pauseBtn').addEventListener('click', function() {
+            clearInterval(shuffleInterval);
+        });
+        
+        // Resume button
+        document.getElementById('resumeBtn').addEventListener('click', function() {
+            clearInterval(shuffleInterval); // Clear any existing interval
+            shuffleInterval = setInterval(advanceSlide, 3000);
+        });
+    </script>
+</body>
+</html>
         </div>
     </section>
 
@@ -1402,6 +1588,28 @@
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
