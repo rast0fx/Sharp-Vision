@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" width="52">
+    <link rel="shortcut icon" href="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png">
     <style>
         :root {
      --primary: #0a0d18;
@@ -148,6 +150,9 @@
      z-index: 999;
      overflow-y: auto;
      -webkit-overflow-scrolling: touch;
+     list-style: none;
+     margin: 0;
+     padding: 0;
  }
  
  .nav-links.active {
@@ -1358,14 +1363,13 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#studio">Studio</a></li>
                 <li><a href="#featured">Projects</a></li>
+                <li><a href="#features">Features</a></li>
                 <li><a href="#contact">Contact</a></li>
+
             </ul>
-            <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+           
         </nav>
     </header>
 
@@ -1570,7 +1574,7 @@
                 </div>
                 <h3 class="feature-title">Advanced Voice Chat</h3>
                 <p class="feature-description">Seamless communication with crystal clear voice chat integration</p>
-                <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1578,7 +1582,7 @@
                 </div>
                 <h3 class="feature-title">Combat Mechanics</h3>
                 <p class="feature-description">Realistic and responsive combat systems for immersive gameplay</p>
-                <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1586,7 +1590,7 @@
                 </div>
                 <h3 class="feature-title">Immersive Gameplay</h3>
                 <p class="feature-description">Engaging game mechanics that keep players coming back for more</p>
-                <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                    
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -1594,7 +1598,7 @@
                 </div>
                 <h3 class="feature-title">Community-Driven</h3>
                 <p class="feature-description">Active community engagement and regular updates based on player feedback</p>
-                <a href="#" class="feature-link">Learn more <i class="ri-arrow-right-line"></i></a>
+                
             </div>
         </div>
     </section>
@@ -1656,34 +1660,7 @@
             }, 1000);
         });
 
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-links');
-        const body = document.body;
-
-        function toggleMenu() {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        }
-
-        // Close menu when clicking outside or on a link
-        document.addEventListener('click', function(e) {
-            const isClickInside = menuToggle.contains(e.target) || navMenu.contains(e.target);
-            
-            if (!isClickInside && navMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
-
-        // Close menu when clicking a link (for touch devices)
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                if (navMenu.classList.contains('active')) {
-                    toggleMenu();
-                }
-            });
-        });
+        
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
