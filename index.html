@@ -1341,105 +1341,149 @@
          break-inside: avoid;
      }
  }
- .navbar {
-  width: 100%;
-  background: var(--bg);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  height: var(--header-height);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: var(--transition);
+ /* PC Navbar */
+.navbar {
+    width: 100%;
+    background: var(--bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: var(--transition);
 }
+
 .navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
 }
+
 .navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
 }
+
 .navbar-logo-img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
+
 .navbar-title {
-  font-family: 'sans-serif', sans-serif;
-  font-size: 1.5rem;
-  color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 1px;
+    font-family: 'sans-serif', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
 }
+
+/* Mobile Menu Toggle */
 .menu-toggle {
-  background: none;
-  border: none;
-  color: var(--accent);
-  font-size: 2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  z-index: 1100;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    transition: background 0.2s;
 }
+
+.menu-toggle .bar {
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 4px 0;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: 0.4s;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Navbar Links */
 .navbar-links {
-  list-style: none;
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  background: var(--bg);
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 2rem 1.5rem;
-  gap: 1.5rem;
-  display: none;
-  transition: var(--transition);
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
-  transition: opacity 0.4s, transform 0.4s;
+    list-style: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: opacity 0.4s, transform 0.4s;
 }
+
 .navbar-links.active {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
+
 .navbar-links li a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 500;
-  transition: color 0.2s;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.2s;
 }
+
 .navbar-links li a:hover,
 .navbar-links li a:focus {
-  color: var(--accent);
+    color: var(--accent);
 }
+
+/* Desktop Navigation */
 @media (min-width: 992px) {
-  .menu-toggle {
-    display: none;
-  }
-  .navbar-links {
-    position: static;
-    display: flex !important;
-    flex-direction: row;
-    background: none;
-    padding: 0;
-    gap: 2rem;
-    align-items: center;
-  }
+    .menu-toggle {
+        display: none;
+    }
+    
+    .navbar-links {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        background: none;
+        padding: 0;
+        gap: 2rem;
+        align-items: center;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 }
+
 body {
-  padding-top: var(--header-height);
+    padding-top: var(--header-height);
 }
      </style>
 </head>
@@ -1453,41 +1497,30 @@ body {
             </circle>
         </svg>
     </div>
-    <nav class="navbar">
-        <div class="navbar-container">
-          <a href="#" class="navbar-logo">
-            <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
-            <span class="navbar-title">SharpVision</span>
-          </a>
-          <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
-            <i class="ri-menu-line"></i>
-          </button>
-          <ul class="navbar-links" id="navbar-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#studio">Studio</a></li>
-            <li><a href="#featured">Projects</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
     <header>
-        <a class="logo">
-            <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="Logo" loading="lazy" width="60" height="40"> SharpVision
-        </a>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#studio">Studio</a></li>
-                <li><a href="#featured">Projects</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
-
-            </ul>
-           
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="#" class="navbar-logo">
+                    <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
+                    <span class="navbar-title">SharpVision</span>
+                </a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="navbar-links" id="navbar-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#studio">Studio</a></li>
+                    <li><a href="#featured">Projects</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
         </nav>
+
+    
     </header>
 
     <section id="home" class="hero">
