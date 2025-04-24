@@ -86,7 +86,7 @@
      font-size: 1.2rem;
      font-weight: 700;
      color: #ffffff;
-     text-decoration: none;
+     
      display: flex;
      align-items: center;
  }
@@ -117,7 +117,7 @@
   width: 28px;
   height: 3px;
   margin: 4px 0;
-  background: var(--accent);
+  background: #ffffff;
   border-radius: 2px;
   transition: 0.4s;
 }
@@ -152,6 +152,7 @@
      list-style: none;
      margin: 0;
      padding: 0;
+     color: #ffffff;
  }
  
  .nav-links.active {
@@ -159,7 +160,7 @@
  }
  
  .nav-links a {
-     color: var(--text);
+     color: #ffffff;
      text-decoration: none;
      font-size: 1.1rem;
      font-weight: 500;
@@ -172,7 +173,7 @@
  }
  
  .nav-links a:hover, .nav-links a:focus {
-     color: var(--accent);
+     color: #ffffff;
      background-color: rgba(255, 255, 255, 0.05);
  }
  
@@ -267,7 +268,7 @@
  }
  
  .btn-primary:hover, .btn-primary:focus {
-     background-color: #00c49c;
+     background-color: #ffffff;
      transform: translateY(-0.125rem);
      box-shadow: 0 0.25rem 0.75rem rgba(0, 230, 156, 0.2);
  }
@@ -920,7 +921,7 @@
      font-size: 1.5rem;
      margin-bottom: 1rem;
      display: inline-block;
-     color: var(--text);
+     color: #ffffff;
      text-decoration: none;
  }
  
@@ -1365,6 +1366,7 @@
     height: var(--header-height);
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: var(--transition);
+    color: #ffffff;
 }
 
 .navbar-container {
@@ -1386,22 +1388,20 @@
     font-size: 1.5rem;
     color: #ffffff;
     transition: color 0.2s;
-
 }
 
 .navbar-logo-img {
     width: 60px;
     height: 60px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
-    -webkit-filter: brightness(0) invert(1);
     color: #ffffff;
+    filter: brightness(0) invert(1);
 }
 
 .navbar-title {
     font-family: 'sans-serif', sans-serif;
     font-size: 1.5rem;
-    color: var(--accent);
+    color: #ffffff;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -1427,7 +1427,7 @@
     width: 28px;
     height: 3px;
     margin: 4px 0;
-    background: var(--accent);
+    background: #ffffff;
     border-radius: 2px;
     transition: 0.4s;
 }
@@ -1461,6 +1461,7 @@
     transform: translateY(-20px);
     pointer-events: none;
     transition: opacity 0.4s, transform 0.4s;
+    color: #ffffff;
 }
 
 .navbar-links.active {
@@ -1471,7 +1472,7 @@
 }
 
 .navbar-links li a {
-    color: var(--text);
+    color: #ffffff;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
@@ -1480,7 +1481,7 @@
 
 .navbar-links li a:hover,
 .navbar-links li a:focus {
-    color: var(--accent);
+    color: #ffffff;
 }
 
 /* Desktop Navigation */
@@ -1500,6 +1501,7 @@
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
+        color: #ffffff;
     }
 }
 
@@ -1515,7 +1517,7 @@ body {
             <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
             <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
         </a>
-        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="var(--accent)" stroke-width="4">
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="#ffffff" stroke-width="4">
             <circle cx="25" cy="25" r="20" stroke-opacity="0.3"/>
             <circle cx="25" cy="25" r="20" stroke-dasharray="125.664" stroke-dashoffset="125.664" stroke-linecap="round">
                 <animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" values="125.664;0;125.664" keyTimes="0;0.5;1"/>
