@@ -1040,7 +1040,7 @@
      margin: 0 auto;
      overflow: hidden;
      touch-action: pan-y;
-     border-radius: 0.5rem;
+     border-radius: 0.7rem;
      background-color: var(--card-bg);
  }
  
@@ -1384,7 +1384,7 @@
     text-decoration: none;
     font-weight: 200;
     font-size: 1.5rem;
-    color: var(--text);
+    color: #ffffff;
     transition: color 0.2s;
 
 }
@@ -1393,6 +1393,9 @@
     width: 60px;
     height: 60px;
     object-fit: contain;
+    filter: brightness(0) invert(1);
+    -webkit-filter: brightness(0) invert(1);
+    color: #ffffff;
 }
 
 .navbar-title {
