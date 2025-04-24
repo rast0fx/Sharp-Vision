@@ -424,6 +424,11 @@
      gap: 1rem;
      min-width: max-content;
      padding-bottom: 0.5rem;
+     overflow-x: auto;
+     scrollbar-width: thin;
+     scrollbar-color: var(--secondary) #1e293b;
+     -webkit-overflow-scrolling: touch;
+     overscroll-behavior-x: contain;
  }
  
  .project-card {
@@ -436,11 +441,7 @@
      flex-shrink: 0;
  }
  
- .project-card:hover, .project-card:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
+
  
  .project-image {
      height: 10rem;
@@ -1041,7 +1042,7 @@
      margin: 0 auto;
      overflow: hidden;
      touch-action: pan-y;
-     border-radius: 0.7rem;
+     border-radius: 0.5rem;
      background-color: var(--card-bg);
  }
  
@@ -1319,7 +1320,7 @@
      * {
          animation-duration: 0.01ms !important;
          animation-iteration-count: 1 !important;
-         transition-duration: 0.01ms !important;
+         transition-duration: 0.03ms !important;
          scroll-behavior: auto !important;
      }
      
@@ -1546,8 +1547,6 @@ body {
                 </ul>
             </div>
         </nav>
-
-    
     </header>
 
     <section id="home" class="hero">
@@ -1837,7 +1836,22 @@ body {
             }, 1000);
         });
 
-        
+        // Redirect to Home page on refresh
+        window.addEventListener('beforeunload', function() {
+            // Store the current page in localStorage
+            localStorage.setItem('lastPage', window.location.pathname);
+        });
+
+        window.addEventListener('load', function() {
+            // Check if this is a refresh
+            const lastPage = localStorage.getItem('lastPage');
+            if (lastPage && lastPage !== window.location.pathname) {
+                // Redirect to Home page
+                window.location.href = '#home';
+            }
+            // Clear the stored page
+            localStorage.removeItem('lastPage');
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
