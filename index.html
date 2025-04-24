@@ -1076,24 +1076,37 @@
  
  /* Loading state */
  .loading {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: var(--bg);
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     z-index: 9999;
-     transition: opacity 0.5s ease;
- }
- 
- .loading.hidden {
-     opacity: 0;
-     pointer-events: none;
- }
- 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg) 0%, rgba(0, 0, 0, 0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+    padding: 2rem;
+    gap: 1rem;
+    backdrop-filter: blur(6px);
+    text-size-adjust: 100%;
+    font-size: 3.5rem;
+}
+
+.loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-image {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto 1.5rem;
+    animation: fadeIn 1s ease-in-out;
+}
  /* Media queries for larger screens */
  @media (min-width: 576px) {
      /* Typography adjustments */
@@ -1369,11 +1382,16 @@
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
+    font-weight: 200;
+    font-size: 1.5rem;
+    color: var(--text);
+    transition: color 0.2s;
+
 }
 
 .navbar-logo-img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
@@ -1490,6 +1508,10 @@ body {
 <body>
     <!-- Loading screen -->
     <div class="loading" id="loading">
+        <a class="navbar-logo">
+            <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
+            <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
+        </a>
         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="var(--accent)" stroke-width="4">
             <circle cx="25" cy="25" r="20" stroke-opacity="0.3"/>
             <circle cx="25" cy="25" r="20" stroke-dasharray="125.664" stroke-dashoffset="125.664" stroke-linecap="round">
@@ -1500,9 +1522,9 @@ body {
     <header>
         <nav class="navbar">
             <div class="navbar-container">
-                <a href="#" class="navbar-logo">
+                <a class="navbar-logo">
                     <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
-                    <span class="navbar-title">SharpVision</span>
+                    <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
                 </a>
                 <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
                     <span class="bar"></span>
