@@ -99,38 +99,37 @@
  
  /* Mobile menu toggle improvements */
  .menu-toggle {
-     display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-     width: 1.875rem;
-     height: 1.25rem;
-     cursor: pointer;
-     z-index: 1000;
-     transition: var(--transition);
-     background: transparent;
-     border: none;
-     outline: none;
- }
- 
- .menu-toggle span {
-     height: 0.125rem;
-     width: 100%;
-     background-color: var(--text);
-     transition: var(--transition);
-     display: block;
- }
- 
- .menu-toggle.active span:first-child {
-     transform: translateY(5px) rotate(45deg);
- }
- 
- .menu-toggle.active span:nth-child(2) {
-     opacity: 0;
- }
- 
- .menu-toggle.active span:last-child {
-     transform: translateY(-5px) rotate(-45deg);
- }
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  transition: background 0.2s;
+}
+.menu-toggle .bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin: 4px 0;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: 0.4s;
+}
+.menu-toggle.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
  
  /* Navigation for mobile improvements */
  .nav-links {
@@ -1342,6 +1341,106 @@
          break-inside: avoid;
      }
  }
+ .navbar {
+  width: 100%;
+  background: var(--bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.navbar-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.navbar-title {
+  font-family: 'sans-serif', sans-serif;
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.menu-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 1100;
+}
+.navbar-links {
+  list-style: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
+  display: none;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.navbar-links.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.navbar-links li a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.navbar-links li a:hover,
+.navbar-links li a:focus {
+  color: var(--accent);
+}
+@media (min-width: 992px) {
+  .menu-toggle {
+    display: none;
+  }
+  .navbar-links {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    background: none;
+    padding: 0;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+body {
+  padding-top: var(--header-height);
+}
      </style>
 </head>
 <body>
@@ -1354,9 +1453,27 @@
             </circle>
         </svg>
     </div>
-
+    <nav class="navbar">
+        <div class="navbar-container">
+          <a href="#" class="navbar-logo">
+            <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
+            <span class="navbar-title">SharpVision</span>
+          </a>
+          <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+            <i class="ri-menu-line"></i>
+          </button>
+          <ul class="navbar-links" id="navbar-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#featured">Projects</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
     <header>
-        <a href="#" class="logo">
+        <a class="logo">
             <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="Logo" loading="lazy" width="60" height="40"> SharpVision
         </a>
         <nav>
@@ -1812,6 +1929,30 @@
         if (reduceMotion) {
             document.documentElement.classList.add('reduce-motion');
         }
+        // Mobile Navbar Toggle
+const menuToggle = document.getElementById('menu-toggle');
+const navbarLinks = document.getElementById('navbar-links');
+menuToggle.addEventListener('click', () => {
+  navbarLinks.classList.toggle('active');
+  menuToggle.classList.toggle('open');
+});
+// Close navbar when a link is clicked
+document.querySelectorAll('.navbar-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navbarLinks.classList.remove('active');
+    menuToggle.classList.remove('open');
+  });
+});
+
+// Close navbar when clicking outside
+document.addEventListener('click', (e) => {
+  const isMenuToggle = menuToggle.contains(e.target);
+  const isNavbarLinks = navbarLinks.contains(e.target);
+  if (!isMenuToggle && !isNavbarLinks && navbarLinks.classList.contains('active')) {
+    navbarLinks.classList.remove('active');
+    menuToggle.classList.remove('open');
+  }
+});
     </script>
 </body>
 </html>
