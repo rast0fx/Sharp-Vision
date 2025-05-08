@@ -50,6 +50,7 @@
      line-height: 1.5;
      min-height: 100vh;
      text-rendering: optimizeLegibility;
+     padding-top: calc(var(--header-height) - 70px);
  }
  
  /* Custom cursor - only show on non-touch devices */
@@ -73,7 +74,7 @@
      display: flex;
      justify-content: space-between;
      align-items: center;
-     padding: 1rem;
+     padding: 0.25rem;
      position: fixed;
      top: 0;
      left: 0;
@@ -81,7 +82,7 @@
      height: var(--header-height);
      z-index: 100;
      transition: var(--transition);
-     background-color: transparent;
+     background-color: var(--bg);
      backdrop-filter: blur(8px);
      -webkit-backdrop-filter: blur(8px);
  }
@@ -190,15 +191,15 @@
  }
  
  /* Hero section */
- .hero {
+ #home {
+     position: relative;
      min-height: 100vh;
      display: flex;
      align-items: center;
-     padding: calc(var(--header-height) + 1rem) 1rem 2rem;
-     position: relative;
-     background-image: radial-gradient(circle at 50% 50%, rgba(18, 25, 56, 0.4) 0%, rgba(8, 11, 23, 0.8) 100%);
-     background-position: center;
-     background-size: cover;
+     justify-content: center;
+     background-color: var(--bg);
+     background-image: radial-gradient(circle at 50% 50%, #121938 0%, #080b17 100%);
+     padding-top: 30px;
  }
  
  .hero-content {
@@ -1511,7 +1512,7 @@
 }
 
 body {
-    padding-top: var(--header-height);
+    padding-top: calc(var(--header-height) - 70px);
 }
      </style>
 </head>
@@ -1583,14 +1584,7 @@ body {
                 </div>
             </div>
             
-            <div class="hero-image">
-                <div class="shuffle-container" id="imageContainer">
-                    <img src="https://i.postimg.cc/cCB5H6WP/Thumb2.webp" alt="SharpVision Game Screenshot 1" loading="lazy" class="active">
-                    <img src="https://i.postimg.cc/y8kvqLDM/image.webp" alt="SharpVision Game Screenshot 2" loading="lazy" class="next">
-                    <img src="https://i.postimg.cc/9f9b0zt1/image.webp" alt="SharpVision Game Screenshot 3" loading="lazy">
-                    <img src="https://i.postimg.cc/sX9JP8Lh/image.webp" alt="SharpVision Game Screenshot 4" loading="lazy" class="prev">
-                </div>
-            </div>
+           
         </div>
     </section>
 
