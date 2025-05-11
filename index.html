@@ -15,60 +15,58 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/CxdB6Wx1/image.png">
 
     <style>
-        :root {
-     --primary: #0a0d18;
-     --secondary: #3b82f6;
-     --text: #e2e8f0;
-     --bg: #0a0d18;
-     --accent: #00e6b8;
-     --accent-secondary: #6366f1;
-     --card-bg: rgba(20, 24, 39, 0.7);
-     --transition: all 0.3s ease;
-     --header-height: 70px;
- }
+      :root {
+    --primary: #1a2233;
+    --secondary: #00A2FF; /* Updated to Roblox blue */
+    --text: #f0f4f8;
+    --bg: #101520;
+    --accent: #00A2FF; /* Matching Roblox blue */
+    --accent-secondary: #797bf4;
+    --card-bg: rgba(25, 34, 59, 0.7);
+    --transition: all 0.3s ease;
+    --header-height: 60px;
+}
  
- /* Base styles - Mobile first approach */
- * {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-     -webkit-tap-highlight-color: transparent;
- }
- 
- html {
-     font-size: 16px;
-     scroll-behavior: smooth;
-     -webkit-text-size-adjust: 100%;
- }
- 
- body {
-     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-     background-color: var(--bg);
-     background-image: radial-gradient(circle at 50% 50%, #121938 0%, #080b17 100%);
-     color: var(--text);
-     overflow-x: hidden;
-     line-height: 1.5;
-     min-height: 100vh;
-     text-rendering: optimizeLegibility;
-     padding-top: calc(var(--header-height) - 70px);
- }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at 50% 50%, #121938 0%, #080b17 100%);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.5;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    padding-top: calc(var(--header-height) - 70px);
+}
  
  /* Custom cursor - only show on non-touch devices */
  @media (hover: hover) and (pointer: fine) {
-     .cursor {
-         width: 1.25rem;
-         height: 1.25rem;
-         border-radius: 50%;
-         background-color: var(--accent);
-         position: fixed;
-         transform: translate(-50%, -50%);
-         pointer-events: none;
-         z-index: 9999;
-         mix-blend-mode: difference;
-         transition: transform 0.2s ease;
-     }
- }
- 
+    .cursor {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+        background-color: var(--accent);
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.2s ease;
+    }
+}
  /* Header styles */
  header {
      display: flex;
@@ -102,40 +100,6 @@
      width: 1.5rem;
  }
  
- /* Mobile menu toggle improvements */
- .menu-toggle {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1100;
-  transition: background 0.2s;
-}
-.menu-toggle .bar {
-  display: block;
-  width: 28px;
-  height: 3px;
-  margin: 4px 0;
-  background: #ffffff;
-  border-radius: 2px;
-  transition: 0.4s;
-}
-.menu-toggle.open .bar:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 6px);
-}
-.menu-toggle.open .bar:nth-child(2) {
-  opacity: 0;
-}
-.menu-toggle.open .bar:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
- 
  /* Navigation for mobile improvements */
  .nav-links {
      display: none;
@@ -158,10 +122,15 @@
      margin: 0;
      padding: 0;
      color: #ffffff;
+     visibility: hidden;
+     opacity: 0;
+     transition: visibility 0s, opacity 0.3s ease;
  }
  
  .nav-links.active {
      display: flex;
+     visibility: visible;
+     opacity: 1;
  }
  
  .nav-links a {
@@ -195,179 +164,118 @@
      position: relative;
      min-height: 100vh;
      display: flex;
+     flex-direction: column;
      align-items: center;
      justify-content: center;
-     background-color: var(--bg);
-     background-image: radial-gradient(circle at 50% 50%, #121938 0%, #080b17 100%);
-     padding-top: 30px;
- }
- 
- .hero-content {
-     max-width: 90%;
-     width: 100%;
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
-     margin: 0 auto;
- }
- 
- .hero-text {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     text-align: center;
- }
- 
- .hero-heading {
-     font-size: 2rem;
-     font-weight: 700;
-     line-height: 1.2;
-     margin-bottom: 1rem;
- }
- 
- .hero-highlight {
-     color: var(--secondary);
- }
- 
- .hero-accent {
-     color: var(--accent);
- }
- 
- .hero-description {
-     margin-bottom: 1.5rem;
-     opacity: 0.85;
-     line-height: 1.6;
- }
- 
- .btn-container {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 1rem;
-     margin-top: 1.5rem;
-     width: 100%;
- }
- 
- .btn-primary, .btn-secondary {
-     padding: 0.75rem 1.5rem;
-     border-radius: 0.5rem;
-     font-size: 1rem;
-     font-weight: 600;
-     cursor: pointer;
-     transition: var(--transition);
-     text-align: center;
-     text-decoration: none;
-     display: inline-flex;
-     align-items: center;
-     justify-content: center;
-     gap: 0.5rem;
-     width: 100%;
-     max-width: 18rem;
-     border: none;
-     outline: none;
- }
- 
- .btn-primary {
-     background-color: var(--accent);
-     color: var(--primary);
- }
- 
- .btn-primary:hover, .btn-primary:focus {
-     background-color: #ffffff;
-     transform: translateY(-0.125rem);
-     box-shadow: 0 0.25rem 0.75rem rgba(0, 230, 156, 0.2);
- }
- 
- .btn-secondary {
      background-color: transparent;
-     color: var(--text);
-     border: 1px solid var(--text);
+
+     text-align: center;
  }
- 
- .btn-secondary:hover, .btn-secondary:focus {
-     background-color: rgba(255, 255, 255, 0.1);
-     color: var(--accent);
-     border-color: var(--accent);
-     transform: translateY(-0.0625rem);
- }
- 
- .hero-focus {
-     margin-top: 1.5rem;
-     text-align: left;
-     width: 100%;
- }
- 
- .hero-focus h3 {
-     margin-bottom: 0.75rem;
-     font-size: 1.125rem;
- }
- 
- .focus-list {
-     list-style: none;
- }
- 
- .focus-list li {
-     margin-bottom: 0.5rem;
-     display: flex;
-     align-items: flex-start;
- }
- 
- .focus-list li::before {
-     content: '•';
-     color: var(--accent);
-     font-weight: bold;
-     display: inline-block;
-     width: 1rem;
-     margin-right: 0.5rem;
- }
- 
- .hero-image {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     width: 100%;
- }
- 
- .hero-image img {
-     max-width: 100%;
-     border-radius: 0.5rem;
-     box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.2);
- }
- 
- .hero-stats {
-     margin-top: 1.5rem;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     gap: 1rem;
- }
- 
- .hero-avatars {
-     display: flex;
-     margin-right: 0.5rem;
- }
- 
- .hero-avatar {
-     width: 2.5rem;
-     height: 2.5rem;
-     border-radius: 50%;
-     background-color: #374151;
-     border: 2px solid var(--bg);
-     margin-left: -0.5rem;
- }
- 
- .hero-avatar:first-child {
-     margin-left: 0;
- }
- 
- .hero-stats-text {
-     font-size: 0.9rem;
- }
- 
- .hero-stats-text strong {
-     color: var(--accent);
- }
- 
+
+ .hero {
+    padding: 4rem 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.hero-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .hero-accent {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+.hero-banner {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    display: block;
+    border: 70%;
+}
+
+.hero-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-heading {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+    text-align: center;
+    width: 100%;
+}
+
+.btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+            width: 100%;
+            gap: 1.5rem;
+            padding: 0;
+            margin-left: 0;
+            justify-content: center;
+        }
+
+.btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+    text-align: center;
+    margin: 0;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--primary);
+    border: none;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--text);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #ffffff;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 230, 156, 0.2);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-0.0625rem);
+}
+
  /* Section styles */
  section {
      padding: 3rem 1rem;
@@ -380,10 +288,6 @@
      margin-bottom: 2rem;
      font-size: 1.75rem;
      font-weight: 700;
- }
- 
- .section-heading span {
-     color: var(--accent);
  }
  
  .section-subheading {
@@ -1364,15 +1268,16 @@
  /* PC Navbar */
 .navbar {
     width: 100%;
-    background: var(--bg);
-    position: fixed;
+    background: transparent;
+    position: relative;
     top: 0;
     left: 0;
+    right: 100;
     z-index: 1000;
     height: var(--header-height);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: transparent;
     transition: var(--transition);
-    color: #ffffff;
+   
 }
 
 .navbar-container {
@@ -1394,6 +1299,8 @@
     font-size: 1.5rem;
     color: #ffffff;
     transition: color 0.2s;
+    margin-left: 1rem;
+
 }
 
 .navbar-logo-img {
@@ -1514,9 +1421,150 @@
 body {
     padding-top: calc(var(--header-height) - 70px);
 }
-     </style>
+
+.notification-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: transparent;
+        border: 2px solid var(--accent);
+        border-radius: 8px;
+        color: var(--text);
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 1000;
+    }
+
+    .notification-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .notification-popup {
+        position: fixed;
+        top: calc(var(--header-height) + 16px);
+        right: 24px;
+        background: var(--bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        max-width: 300px;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .notification-popup.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .merch-button {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        background-color: var(--accent);
+        color: var(--primary);
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.75rem 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        z-index: 1000;
+        width: auto;
+        height: auto;
+    }
+
+    .merch-button:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 0.5rem 1rem rgba(0, 230, 156, 0.3);
+    }
+
+    .menu-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--text);
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Show on mobile */
+    }
+    
+    .navbar-links {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        display: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-links.active {
+        display: flex;
+    }
+    
+    .navbar-links li {
+        width: 100%;
+    }
+    
+    .navbar-links a {
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 4px;
+    }
+    
+    /* Hamburger animation */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+    
+</style>
 </head>
 <body>
+   
+
+    <!-- Notification Popup -->
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-content">
+        <center><p><strong>🔥 New Drop Alert!</strong></p>
+            <p>SharpVision Merch is here,limited for our fans.</p>
+            <p> <b>Grab yours before it's gone!</p></b>
+        </center>
+        </div>
+    </div>
+
     <!-- Loading screen -->
     <div class="loading" id="loading">
         <a class="navbar-logo">
@@ -1530,6 +1578,8 @@ body {
             </circle>
         </svg>
     </div>
+ 
+
     <header>
         <nav class="navbar">
             <div class="navbar-container">
@@ -1537,54 +1587,58 @@ body {
                     <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
                     <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
                 </a>
-                <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+                
+                <!-- Add hamburger button -->
+                <button class="menu-toggle" id="mobile-menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
+    
                 <ul class="navbar-links" id="navbar-links">
                     <li><a href="#home">Home</a></li>
-                    
                     <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button class="notification-button" id="merchButton" onclick="toggleNotification()">
+                            <i class="fas fa-bell"></i>
+                            <span>Merch Drop Alert</span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
-
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-heading">Crafting <span class="hero-highlight">Next-Gen</span> Gaming</h1>
+          <!-- Notification Button -->
+   
+
+    <!-- Notification Popup -->
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-content">
+            <p><strong>🔥 New Drop Alert!</strong></p>
+            <p>SharpVision Merch is here — limited for our fans.</p>
+            <p> <b>Grab yours before it's gone!</p></b>
+            <button class="close-btn" onclick="toggleNotification()">×</button>
+        </div>
+    </div>
+
+        <div class="hero">
+            <div class="hero-banner">
+                <img src="https://i.postimg.cc/tgtWLFdr/Def-Thumbnail-1.webp" alt="Banner Image" class="banner-img">
+            </div>
+            <div class="hero-text" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                <h1 class="hero-heading">Crafting <span class="hero-highlight"> Enjoyable </span> Experiences on <span class="hero-highlight">Roblox</span></h1>
                 <p class="hero-description">
-                    SharpVision is at the forefront of creating <span class="hero-accent">immersive</span> and <span class="hero-accent">engaging</span> ROBLOX experiences.
+                    SharpVision is at the forefront of creating <span class="hero-accent">immersive</span> and <span class="hero-accent">engaging</span> Roblox experiences.
                 </p>
                 <p class="hero-description">
-                    From <span class="hero-accent">military simulations</span> to <span class="hero-accent">innovative games</span>, we're dedicated to delivering high-quality games that push the boundaries.
+                    Focused on quality, community, and creativity — that's the <b>SharpVision</b> way.
                 </p>
-                <div class="btn-container">
-                    <a href="#contact" class="btn-primary">Get Started</a>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Join Us</a>
                     <a href="#about" class="btn-secondary">Learn More</a>
                 </div>
-                <div class="hero-focus">
-                    <h3>Our Focus:</h3>
-                    <ul class="focus-list">
-                        <li>Advanced Voice Chat Integration</li>
-                        <li>Realistic Combat Mechanics</li>
-                        <li>Immersive Gameplay Experience</li>
-                        <li>Community-Driven Development</li>
-                    </ul>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-avatars">
-                        <div class="hero-avatar"></div>
-                        <div class="hero-avatar"></div>
-                        <div class="hero-avatar"></div>
-                    </div>
-                    <p class="hero-stats-text">Join over <strong>2 million</strong> satisfied players</p>
-                </div>
             </div>
-            
-           
         </div>
     </section>
 
@@ -1634,6 +1688,7 @@ body {
         </div>
     </footer>
 
+  
     <script>
         // Loading screen
         window.addEventListener('load', function() {
@@ -1812,29 +1867,90 @@ body {
             document.documentElement.classList.add('reduce-motion');
         }
         // Mobile Navbar Toggle
-const menuToggle = document.getElementById('menu-toggle');
-const navbarLinks = document.getElementById('navbar-links');
-menuToggle.addEventListener('click', () => {
-  navbarLinks.classList.toggle('active');
-  menuToggle.classList.toggle('open');
-});
-// Close navbar when a link is clicked
-document.querySelectorAll('.navbar-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navbarLinks.classList.remove('active');
-    menuToggle.classList.remove('open');
-  });
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarLinks = document.getElementById('navbar-links');
+    menuToggle.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active');
+        menuToggle.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+    });
 
-// Close navbar when clicking outside
-document.addEventListener('click', (e) => {
-  const isMenuToggle = menuToggle.contains(e.target);
-  const isNavbarLinks = navbarLinks.contains(e.target);
-  if (!isMenuToggle && !isNavbarLinks && navbarLinks.classList.contains('active')) {
-    navbarLinks.classList.remove('active');
-    menuToggle.classList.remove('open');
-  }
+    // Close navbar when a link is clicked
+    document.querySelectorAll('.navbar-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navbarLinks.classList.remove('active');
+            menuToggle.classList.remove('open');
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    // Close navbar when clicking outside
+    document.addEventListener('click', (e) => {
+        const isMenuToggle = menuToggle.contains(e.target);
+        const isNavbarLinks = navbarLinks.contains(e.target);
+        if (!isMenuToggle && !isNavbarLinks && navbarLinks.classList.contains('active')) {
+            navbarLinks.classList.remove('active');
+            menuToggle.classList.remove('open');
+            document.body.classList.remove('menu-open');
+        }
+    });
 });
     </script>
+
+<script>
+    function toggleNotification() {
+        const popup = document.getElementById('notificationPopup');
+        popup.classList.toggle('active');
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const merchButton = document.getElementById('merchButton');
+        const notificationPopup = document.getElementById('notificationPopup');
+        
+        merchButton.addEventListener('click', function() {
+            notificationPopup.classList.add('active');
+            setTimeout(() => {
+                notificationPopup.classList.remove('active');
+            }, 2000); // Hide after 3 seconds
+        });
+
+        // Close popup when clicking the close button
+        const closeBtn = notificationPopup.querySelector('.close-btn');
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent click from reaching merch button
+            notificationPopup.classList.remove('active');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbarLinks = document.getElementById('navbar-links');
+
+    // Toggle mobile menu
+    mobileMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileMenu.classList.toggle('active');
+        navbarLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navbarLinks.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            navbarLinks.classList.remove('active');
+        }
+    });
+
+    // Close menu when clicking links
+    document.querySelectorAll('.navbar-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            navbarLinks.classList.remove('active');
+        });
+    });
+});
+</script>
 </body>
 </html>
