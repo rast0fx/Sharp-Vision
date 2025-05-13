@@ -1,1956 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>SharpVision</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="https://i.postimg.cc/CxdB6Wx1/image.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/CxdB6Wx1/image.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/CxdB6Wx1/image.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://i.postimg.cc/CxdB6Wx1/image.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/CxdB6Wx1/image.png">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SharpVision - Roblox Development Group</title>
+    <link
+      rel="icon"
+      href="https://i.postimg.cc/CxdB6Wx1/image.png"
+      type="image/png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#0099ff", secondary: "#001f3f" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      :root {
-    --primary: #1a2233;
-    --secondary: #00A2FF; /* Updated to Roblox blue */
-    --text: #f0f4f8;
-    --bg: #101520;
-    --accent: #00A2FF; /* Matching Roblox blue */
-    --accent-secondary: #797bf4;
-    --card-bg: rgba(25, 34, 59, 0.7);
-    --transition: all 0.3s ease;
-    --header-height: 60px;
-}
- 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: var(--bg);
-    background-image: radial-gradient(circle at 50% 50%, #121938 0%, #080b17 100%);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.5;
-    min-height: 100vh;
-    text-rendering: optimizeLegibility;
-    padding-top: calc(var(--header-height) - 70px);
-}
- 
- /* Custom cursor - only show on non-touch devices */
- @media (hover: hover) and (pointer: fine) {
-    .cursor {
-        width: 1.25rem;
-        height: 1.25rem;
-        border-radius: 50%;
-        background-color: var(--accent);
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .loader {
         position: fixed;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        mix-blend-mode: difference;
-        transition: transform 0.2s ease;
-    }
-}
- /* Header styles */
- header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 0.25rem;
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: var(--header-height);
-     z-index: 100;
-     transition: var(--transition);
-     background-color: var(--bg);
-     backdrop-filter: blur(8px);
-     -webkit-backdrop-filter: blur(8px);
- }
- 
- .logo {
-     font-size: 1.2rem;
-     font-weight: 700;
-     color: #ffffff;
-     
-     display: flex;
-     align-items: center;
- }
- 
- .logo svg {
-     margin-right: 0.5rem;
-     height: 1.5rem;
-     width: 1.5rem;
- }
- 
- /* Navigation for mobile improvements */
- .nav-links {
-     display: none;
-     position: fixed;
-     top: var(--header-height);
-     left: 0;
-     right: 0;
-     bottom: 0;
-     background-color: rgba(10, 13, 24, 0.98);
-     padding: 1rem;
-     flex-direction: column;
-     gap: 0.75rem;
-     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-     backdrop-filter: blur(10px);
-     -webkit-backdrop-filter: blur(10px);
-     z-index: 999;
-     overflow-y: auto;
-     -webkit-overflow-scrolling: touch;
-     list-style: none;
-     margin: 0;
-     padding: 0;
-     color: #ffffff;
-     visibility: hidden;
-     opacity: 0;
-     transition: visibility 0s, opacity 0.3s ease;
- }
- 
- .nav-links.active {
-     display: flex;
-     visibility: visible;
-     opacity: 1;
- }
- 
- .nav-links a {
-     color: #ffffff;
-     text-decoration: none;
-     font-size: 1.1rem;
-     font-weight: 500;
-     transition: var(--transition);
-     display: block;
-     padding: 1rem;
-     border-radius: 0.5rem;
-     text-align: center;
-     touch-action: manipulation;
- }
- 
- .nav-links a:hover, .nav-links a:focus {
-     color: #ffffff;
-     background-color: rgba(255, 255, 255, 0.05);
- }
- 
- /* Prevent scrolling when menu is open */
- body.menu-open {
-     overflow: hidden;
-     position: fixed;
-     width: 100%;
-     height: 100%;
- }
- 
- /* Hero section */
- #home {
-     position: relative;
-     min-height: 100vh;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     background-color: transparent;
-
-     text-align: center;
- }
-
- .hero {
-    padding: 4rem 0;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.hero-highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        .hero-accent {
-            color: var(--secondary);
-            font-weight: 500;
-        }
-
-.hero-banner {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 2rem;
-    display: block;
-    border: 70%;
-}
-
-.hero-text {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-heading {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    text-align: center;
-}
-
-.hero-description {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: var(--text);
-    text-align: center;
-    width: 100%;
-}
-
-.btn-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 1rem;
-            width: 100%;
-            gap: 1.5rem;
-            padding: 0;
-            margin-left: 0;
-            justify-content: center;
-        }
-
-.btn-primary, .btn-secondary {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 200px;
-    text-align: center;
-    margin: 0;
-}
-
-.btn-primary {
-    background-color: var(--accent);
-    color: var(--primary);
-    border: none;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text);
-    border: 1px solid var(--text);
-}
-
-.btn-primary:hover, .btn-primary:focus {
-    background-color: #ffffff;
-    transform: translateY(-0.125rem);
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 230, 156, 0.2);
-}
-
-.btn-secondary:hover, .btn-secondary:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--accent);
-    border-color: var(--accent);
-    transform: translateY(-0.0625rem);
-}
-
- /* Section styles */
- section {
-     padding: 3rem 1rem;
-     position: relative;
-     scroll-margin-top: var(--header-height);
- }
- 
- .section-heading {
-     text-align: center;
-     margin-bottom: 2rem;
-     font-size: 1.75rem;
-     font-weight: 700;
- }
- 
- .section-subheading {
-     text-align: center;
-     max-width: 90%;
-     margin: 0 auto 2rem;
-     opacity: 0.85;
-     line-height: 1.6;
- }
- 
- /* Featured projects */
- .featured-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
- }
- 
- .scroll-container {
-     overflow-x: auto;
-     scrollbar-width: thin;
-     scrollbar-color: var(--secondary) #1e293b;
-     padding-bottom: 1rem;
-     -webkit-overflow-scrolling: touch;
-     overscroll-behavior-x: contain;
- }
- 
- .scroll-container::-webkit-scrollbar {
-     height: 0.375rem;
- }
- 
- .scroll-container::-webkit-scrollbar-track {
-     background: #1e293b;
-     border-radius: 1.25rem;
- }
- 
- .scroll-container::-webkit-scrollbar-thumb {
-     background-color: var(--secondary);
-     border-radius: 1.25rem;
- }
- 
- .project-grid {
-     display: flex;
-     gap: 1rem;
-     min-width: max-content;
-     padding-bottom: 0.5rem;
-     overflow-x: auto;
-     scrollbar-width: thin;
-     scrollbar-color: var(--secondary) #1e293b;
-     -webkit-overflow-scrolling: touch;
-     overscroll-behavior-x: contain;
- }
- 
- .project-card {
-     width: 17.5rem;
-     background-color: var(--card-bg);
-     border-radius: 0.5rem;
-     overflow: hidden;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     transition: var(--transition);
-     flex-shrink: 0;
- }
- 
-
- 
- .project-image {
-     height: 10rem;
-     background-color: #1f2937;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     overflow: hidden;
- }
- 
- .project-image img {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
-     display: block;
- }
- 
- .project-content {
-     padding: 1.25rem;
- }
- 
- .project-title {
-     font-size: 1.125rem;
-     font-weight: 600;
-     margin-bottom: 0.5rem;
- }
- 
- .project-category {
-     font-size: 0.875rem;
-     color: #9ca3af;
-     margin-bottom: 1rem;
- }
- 
- .project-meta {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
- }
- 
- .project-date {
-     font-size: 0.75rem;
-     color: #6b7280;
- }
- 
- .project-link {
-     color: var(--secondary);
-     font-size: 0.875rem;
-     text-decoration: none;
-     transition: var(--transition);
-     padding: 0.25rem 0;
- }
- 
- .project-link:hover, .project-link:focus {
-     text-decoration: underline;
-     color: var(--accent);
- }
- 
- /* Process section */
- .process-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
- }
- 
- .process-cards {
-     display: flex;
-     flex-direction: column;
-     gap: 1.5rem;
- }
- 
- .process-card {
-     background-color: var(--card-bg);
-     border-radius: 0.5rem;
-     padding: 1.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     transition: var(--transition);
- }
- 
- .process-card:hover, .process-card:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
- 
- .process-card h3 {
-     margin-bottom: 1rem;
-     font-size: 1.25rem;
- }
- 
- .process-card p {
-     line-height: 1.6;
-     opacity: 0.85;
- }
- 
- .process-image {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     order: -1;
- }
- 
- .process-image img {
-     max-width: 100%;
-     border-radius: 0.5rem;
-     box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.2);
- }
- 
- /* Feature grid */
- .feature-grid {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 1.5rem;
- }
- 
- .feature-card {
-     background-color: var(--card-bg);
-     border-radius: 0.5rem;
-     padding: 1.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     transition: var(--transition);
-     display: flex;
-     flex-direction: column;
- }
- 
- .feature-card:hover, .feature-card:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
- 
- .feature-icon {
-     width: 2rem;
-     height: 2rem;
-     background-color: rgba(59, 130, 246, 0.1);
-     border-radius: 0.5rem;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin-bottom: 1.25rem;
- }
- 
- .feature-icon i {
-     font-size: 1.5rem;
-     color: var(--secondary);
- }
- 
- .feature-title {
-     font-size: 1.125rem;
-     font-weight: 600;
-     margin-bottom: 0.75rem;
- }
- 
- .feature-description {
-     line-height: 1.6;
-     opacity: 0.85;
-     margin-bottom: 1.25rem;
- }
- 
- .feature-link {
-     margin-top: auto;
-     color: var(--secondary);
-     text-decoration: none;
-     display: flex;
-     align-items: center;
-     font-size: 0.9rem;
-     transition: var(--transition);
-     padding: 0.25rem 0;
- }
- 
- .feature-link:hover, .feature-link:focus {
-     color: var(--accent);
- }
- 
- .feature-link i {
-     margin-left: 0.5rem;
- }
- 
- /* About section */
- .about-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
- }
- 
- .about-content {
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
- }
- 
- .about-text p {
-     margin-bottom: 1rem;
-     line-height: 1.8;
- }
- 
- .about-stats {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 1rem;
- }
- 
- .stat-card {
-     background-color: var(--card-bg);
-     padding: 1.5rem;
-     border-radius: 0.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     text-align: center;
-     transition: var(--transition);
- }
- 
- .stat-card:hover, .stat-card:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
- 
- .stat-number {
-     font-size: 2rem;
-     font-weight: 700;
-     color: var(--accent);
-     margin-bottom: 0.5rem;
- }
- 
- .stat-label {
-     opacity: 0.85;
-     font-size: 0.9rem;
- }
- 
- /* Studio section */
- .studio-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
- }
- 
- .studio-content {
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
- }
- 
- .studio-values {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 1rem;
- }
- 
- .value-card {
-     background-color: var(--card-bg);
-     padding: 1.5rem;
-     border-radius: 0.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     transition: var(--transition);
- }
- 
- .value-card:hover, .value-card:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
- 
- .value-icon {
-     font-size: 2rem;
-     color: var(--accent);
-     margin-bottom: 0.75rem;
- }
- 
- .value-title {
-     font-size: 1.125rem;
-     margin-bottom: 0.75rem;
- }
- 
- .studio-team {
-     display: flex;
-     flex-direction: column;
-     gap: 1.5rem;
- }
- 
- .team-grid {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 1.5rem;
- }
- 
- .team-member {
-     background-color: var(--card-bg);
-     padding: 1.5rem;
-     border-radius: 0.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
-     text-align: center;
-     transition: var(--transition);
- }
- 
- .team-member:hover, .team-member:focus-within {
-     transform: translateY(-0.3125rem);
-     border-color: var(--accent);
-     box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.2);
- }
- 
- .member-image {
-     width: 6.25rem;
-     height: 6.25rem;
-     border-radius: 50%;
-     overflow: hidden;
-     margin: 0 auto 1rem;
-     background-color: #1f2937;
- }
- 
- .member-image img {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
- }
- 
- .team-member h4 {
-     font-size: 1.1rem;
-     margin-bottom: 0.5rem;
- }
- 
- .team-member p {
-     color: var(--text);
-     opacity: 0.85;
- }
- 
- /* Features section */
- .features-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
- }
- 
- .features-grid {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 2rem;
-     margin-top: 2rem;
- }
- 
- .feature-details {
-     list-style: none;
-     padding: 0;
-     margin: 0;
- }
- 
- .feature-details li {
-     margin-bottom: 0.5rem;
-     opacity: 0.85;
-     position: relative;
-     padding-left: 1.5rem;
- }
- 
- .feature-details li:before {
-     content: '•';
-     color: var(--accent);
-     position: absolute;
-     left: 0;
-     top: 0;
- }
- 
- /* Contact section */
- .contact-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
- }
- 
- .contact-form {
-     background-color: var(--card-bg);
-     border-radius: 0.5rem;
-     padding: 1.5rem;
-     border: 1px solid rgba(255, 255, 255, 0.05);
- }
- 
- .form-group {
-     margin-bottom: 1.25rem;
- }
- 
- .form-label {
-     display: block;
-     margin-bottom: 0.5rem;
-     font-size: 0.9rem;
-     opacity: 0.9;
- }
- 
- .form-control {
-     width: 100%;
-     padding: 0.75rem 1rem;
-     background-color: rgba(0, 0, 0, 0.2);
-     border: 1px solid rgba(255, 255, 255, 0.1);
-     border-radius: 0.25rem;
-     color: var(--text);
-     font-size: 1rem;
-     resize: none;
-     transition: var(--transition);
- }
- 
- .form-control::placeholder {
-     color: rgba(255, 255, 255, 0.4);
- }
- 
- .form-control:focus {
-     outline: none;
-     border-color: var(--accent);
-     box-shadow: 0 0 0 0.125rem rgba(0, 230, 184, 0.2);
- }
- 
- .social-links {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 1rem;
-     margin-top: 1.5rem;
- }
- 
- .social-link {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     padding: 1rem;
-     border-radius: 0.5rem;
-     text-decoration: none;
-     color: var(--text);
-     font-weight: 500;
-     transition: var(--transition);
-     border: 1px solid rgba(255, 255, 255, 0.1);
-     text-align: center;
- }
- 
- .social-link.twitter {
-     border-color: #1DA1F2;
- }
- 
- .social-link.discord {
-     border-color: #5865F2;
- }
- 
- .social-link.roblox {
-     border-color: #FF0000;
- }
- 
- .social-link.tiktok {
-     border-color: #FF0050;
- }
- 
- .social-link:hover, .social-link:focus {
-     transform: translateY(-0.1875rem);
-     box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
- }
- 
- /* Footer */
- footer {
-     background-color: rgba(17, 24, 39, 0.8);
-     padding: 3rem 1rem 1.5rem;
- }
- 
- .footer-container {
-     width: 100%;
-     max-width: 90%;
-     margin: 0 auto;
- }
- 
- .footer-content {
-     display: grid;
-     grid-template-columns: 1fr;
-     gap: 2rem;
-     margin-bottom: 2rem;
- }
- 
- .footer-logo {
-     font-size: 1.5rem;
-     margin-bottom: 1rem;
-     display: inline-block;
-     color: #ffffff;
-     text-decoration: none;
- }
- 
- .footer-description {
-     opacity: 0.7;
-     margin-bottom: 1.5rem;
- }
- 
- .footer-heading {
-     font-size: 1.1rem;
-     font-weight: 600;
-     margin-bottom: 1rem;
- }
- 
- .footer-links {
-     list-style: none;
- }
- 
- .footer-links li {
-     margin-bottom: 0.75rem;
- }
- 
- .footer-links a {
-     color: #9ca3af;
-     text-decoration: none;
-     transition: var(--transition);
-     font-size: 0.9rem;
-     display: block;
-     padding: 0.375rem 0;
- }
- 
- .footer-links a:hover, .footer-links a:focus {
-     color: var(--text);
-     padding-left: 0.5rem;
- }
- 
- .footer-social {
-     display: flex;
-     gap: 1rem;
-     flex-wrap: wrap;
- }
- 
- .footer-social a {
-     width: 2.5rem;
-     height: 2.5rem;
-     border-radius: 50%;
-     background-color: rgba(75, 85, 99, 0.3);
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     color: var(--text);
-     transition: var(--transition);
-     text-decoration: none;
- }
- 
- .footer-social a:hover, .footer-social a:focus {
-     background-color: var(--secondary);
-     transform: translateY(-0.1875rem);
- }
- 
- .footer-bottom {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 0.5rem;
-     padding: 1rem;
-     border-top: 1px solid rgba(255, 255, 255, 0.1);
- }
- 
- .copyright {
-     font-size: 0.875rem;
-     opacity: 0.6;
- }
- 
- .footer-tagline {
-     font-size: 0.875rem;
-     color: var(--text);
-     opacity: 0.8;
-     text-align: center;
- }
- 
- .footer-tagline a {
-     color: var(--text);
-     text-decoration: none;
-     font-weight: 500;
-     transition: var(--transition);
- }
- 
- .footer-tagline a:hover {
-     color: var(--accent);
- }
- 
- /* Reveal animations */
- .reveal {
-     opacity: 0;
-     transform: translateY(1.875rem);
-     transition: all 0.8s ease;
- }
- 
- .reveal.active {
-     opacity: 1;
-     transform: translateY(0);
- }
- 
- /* Accessibility improvements */
- a:focus, button:focus, input:focus, textarea:focus {
-     outline: 2px solid var(--accent);
-     outline-offset: 2px;
- }
- 
- /* Shuffle container styles */
- .shuffle-container {
-     width: 100%;
-     max-width: 500px;
-     height: 300px;
-     position: relative;
-     margin: 0 auto;
-     overflow: hidden;
-     touch-action: pan-y;
-     border-radius: 0.5rem;
-     background-color: var(--card-bg);
- }
- 
- .shuffle-container img {
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
-     opacity: 0;
-     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-     transform: translateX(100%);
- }
- 
- .shuffle-container img.active {
-     opacity: 1;
-     transform: translateX(0);
-     z-index: 2;
- }
- 
- .shuffle-container img.prev {
-     opacity: 0.5;
-     transform: translateX(-30%);
-     z-index: 1;
- }
- 
- .shuffle-container img.next {
-     opacity: 0.5;
-     transform: translateX(30%);
-     z-index: 1;
- }
- 
- /* Loading state */
- .loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--bg) 0%, rgba(0, 0, 0, 0.95) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
-    padding: 2rem;
-    gap: 1rem;
-    backdrop-filter: blur(6px);
-    text-size-adjust: 100%;
-    font-size: 3.5rem;
-}
-
-.loading.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-image {
-    max-width: 80%;
-    height: auto;
-    display: block;
-    margin: 0 auto 1.5rem;
-    animation: fadeIn 1s ease-in-out;
-}
- /* Media queries for larger screens */
- @media (min-width: 576px) {
-     /* Typography adjustments */
-     .hero-heading {
-         font-size: 2.25rem;
-     }
-     
-     .section-heading {
-         font-size: 2rem;
-     }
-     
-     /* Social links */
-     .social-links {
-         grid-template-columns: repeat(2, 1fr);
-     }
-     
-     /* Stats cards */
-     .about-stats {
-         grid-template-columns: repeat(2, 1fr);
-     }
-     
-     /* Team grid */
-     .team-grid {
-         grid-template-columns: repeat(2, 1fr);
-     }
-     
-     /* Studio values */
-     .studio-values {
-         grid-template-columns: repeat(2, 1fr);
-     }
- }
- 
- @media (min-width: 768px) {
-     /* Header improvements */
-     header {
-         padding: 1.25rem 2rem;
-     }
-     
-     /* Section padding */
-     section {
-         padding: 5rem 2rem;
-     }
-     
-     /* Hero layout */
-     .hero {
-         padding: 0 2rem;
-     }
-     
-     .hero-content {
-         max-width: 85%;
-     }
-     
-     .hero-heading {
-         font-size: 2.5rem;
-     }
-     
-     .btn-container {
-         flex-direction: row;
-         justify-content: center;
-     }
-     
-     .btn-primary, .btn-secondary {
-         max-width: 12rem;
-     }
-     
-     /* Features grid */
-     .feature-grid {
-         grid-template-columns: repeat(2, 1fr);
-         max-width: 85%;
-     }
-     
-     /* Process cards */
-     .process-container {
-         max-width: 85%;
-     }
-     
-     /* Footer layout */
-     .footer-content {
-         grid-template-columns: 1.5fr repeat(2, 1fr);
-     }
-     
-     .footer-bottom {
-         flex-direction: row;
-         justify-content: space-between;
-     }
-     
-     /* Contact layout */
-     .contact-container {
-         max-width: 85%;
-     }
- }
- 
- @media (min-width: 992px) {
-     /* Navigation for desktop */
-     .menu-toggle {
-         display: none;
-     }
-     
-     .nav-links {
-         display: flex !important;
-         position: static;
-         flex-direction: row;
-         background-color: transparent;
-         box-shadow: none;
-         padding: 0;
-         gap: 2rem;
-         backdrop-filter: none;
-         -webkit-backdrop-filter: none;
-         overflow: visible;
-     }
-     
-     .nav-links a {
-         padding: 0.5rem;
-         text-align: left;
-     }
-     
-     /* Hero layout for desktop */
-     .hero-content {
-         display: grid;
-         grid-template-columns: 1fr 1fr;
-         gap: 3rem;
-         max-width: 75rem;
-     }
-     
-     .hero-text {
-         text-align: left;
-         align-items: flex-start;
-     }
-     
-     .btn-container {
-         justify-content: flex-start;
-     }
-     
-     /* Process layout */
-     .process-container {
-         display: grid;
-         grid-template-columns: 1fr 1fr;
-         gap: 3rem;
-         max-width: 75rem;
-     }
-     
-     .process-image {
-         order: 2;
-     }
-     
-     /* About layout */
-     .about-content {
-         display: grid;
-         grid-template-columns: 2fr 1fr;
-         gap: 3rem;
-         align-items: center;
-     }
-     
-     .about-stats {
-         grid-template-columns: 1fr;
-     }
-     
-     /* Features layout */
-     .features-container,
-     .feature-grid {
-         max-width: 75rem;
-     }
-     
-     .feature-grid {
-         grid-template-columns: repeat(3, 1fr);
-     }
-     
-     /* Team layout */
-     .team-grid {
-         grid-template-columns: repeat(3, 1fr);
-     }
-     
-     /* Contact layout */
-     .contact-container {
-         max-width: 75rem;
-     }
-     
-     /* Footer layout */
-     .footer-content {
-         grid-template-columns: 1.5fr repeat(3, 1fr);
-     }
-     
-     .footer-social {
-         grid-template-columns: repeat(3, 1fr);
-     }
-     
-     .footer-bottom {
-         flex-direction: row;
-         justify-content: space-between;
-     }
- }
- 
- @media (min-width: 1200px) {
-     .hero-heading {
-         font-size: 3rem;
-     }
-     
-     .section-heading {
-         font-size: 2.5rem;
-     }
-     
-     .feature-grid {
-         grid-template-columns: repeat(4, 1fr);
-     }
- }
- 
- /* Reduced motion preferences */
- @media (prefers-reduced-motion: reduce) {
-     * {
-         animation-duration: 0.01ms !important;
-         animation-iteration-count: 1 !important;
-         transition-duration: 0.03ms !important;
-         scroll-behavior: auto !important;
-     }
-     
-     .reveal {
-         transition: none !important;
-     }
-     
-     .shuffle-container img {
-         transition: none !important;
-     }
- }
- 
- /* Dark mode preference */
- @media (prefers-color-scheme: dark) {
-     body {
-         background-color: var(--bg);
-     }
- }
- 
- /* Print styles */
- @media print {
-     body {
-         background-color: white;
-         color: black;
-     }
-     
-     header, footer, .btn-container {
-         display: none !important;
-     }
-     
-     section {
-         padding: 1rem !important;
-         break-inside: avoid;
-     }
- }
- /* PC Navbar */
-.navbar {
-    width: 100%;
-    background: transparent;
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 100;
-    z-index: 1000;
-    height: var(--header-height);
-    box-shadow: transparent;
-    transition: var(--transition);
-   
-}
-
-.navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-}
-
-.navbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    font-weight: 200;
-    font-size: 1.5rem;
-    color: #ffffff;
-    transition: color 0.2s;
-    margin-left: 1rem;
-
-}
-
-.navbar-logo-img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    color: #ffffff;
-    filter: brightness(0) invert(1);
-}
-
-.navbar-title {
-    font-family: 'sans-serif', sans-serif;
-    font-size: 1.5rem;
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-/* Mobile Menu Toggle */
-.menu-toggle {
-    width: 40px;
-    height: 40px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-    transition: background 0.2s;
-}
-
-.menu-toggle .bar {
-    display: block;
-    width: 28px;
-    height: 3px;
-    margin: 4px 0;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: 0.4s;
-}
-
-.menu-toggle.open .bar:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 6px);
-}
-
-.menu-toggle.open .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.open .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* Mobile Navbar Links */
-.navbar-links {
-    list-style: none;
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem 1.5rem;
-    gap: 1.5rem;
-    display: none;
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
-    transition: opacity 0.4s, transform 0.4s;
-    color: #ffffff;
-}
-
-.navbar-links.active {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.navbar-links li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.navbar-links li a:hover,
-.navbar-links li a:focus {
-    color: #ffffff;
-}
-
-/* Desktop Navigation */
-@media (min-width: 992px) {
-    .menu-toggle {
-        display: none;
-    }
-    
-    .navbar-links {
-        position: static;
-        display: flex !important;
-        flex-direction: row;
-        background: none;
-        padding: 0;
-        gap: 2rem;
-        align-items: center;
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-        color: #ffffff;
-    }
-}
-
-body {
-    padding-top: calc(var(--header-height) - 70px);
-}
-
-.notification-button {
-        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0a0a1a;
         display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        background: transparent;
-        border: 2px solid var(--accent);
-        border-radius: 8px;
-        color: var(--text);
-        cursor: pointer;
-        transition: var(--transition);
         z-index: 1000;
-    }
-
-    .notification-button:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .notification-popup {
-        position: fixed;
-        top: calc(var(--header-height) + 16px);
-        right: 24px;
-        background: var(--bg);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-        max-width: 300px;
-        transform: translateY(-10px);
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+      .loader.hidden {
         opacity: 0;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .notification-popup.active {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .merch-button {
-        position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        background-color: var(--accent);
-        color: var(--primary);
-        border: none;
-        border-radius: 0.5rem;
-        padding: 0.75rem 0.5rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        z-index: 1000;
-        width: auto;
+        visibility: hidden;
+        display: none;
+      }
+      .loader img {
+        animation: pulse 1.5s infinite ease-in-out;
+        max-width: 80%;
         height: auto;
-    }
-
-    .merch-button:hover {
-        transform: translateY(-0.25rem);
-        box-shadow: 0 0.5rem 1rem rgba(0, 230, 156, 0.3);
-    }
-
-    .menu-toggle {
-    display: none; /* Hidden by default */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1001;
-}
-
-.menu-toggle .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 0;
-    background: var(--text);
-    transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* Show on mobile */
-    }
-    
-    .navbar-links {
+      }
+      @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.7; }
+        50% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.7; }
+      }
+      .hero {
+        position: relative;
+        padding-top: 80px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      .merch-alert {
         position: absolute;
-        top: var(--header-height);
+        bottom: 10px;
+        right: 20px;
+        background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        animation: float 3s ease-in-out infinite;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        font-size: 14px;
+        z-index: 10;
+      }
+      .merch-alert:hover {
+        transform: translateY(-5px) scale(1.05);
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .hero-bg {
+        position: absolute;
+        top: 0;
         left: 0;
         right: 0;
-        background: var(--bg);
-        flex-direction: column;
-        padding: 1rem;
-        gap: 0.5rem;
-        display: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .navbar-links.active {
-        display: flex;
-    }
-    
-    .navbar-links li {
+        bottom: 0;
+        background-image: url('https://i.postimg.cc/G3qTy302/roblox-pictures.jpg');
+        background-size: cover;
+        background-position: center;
+        filter: blur(7px);
+        z-index: 0;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%);
+        z-index: 1;
+      }
+      .game-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .game-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 153, 255, 0.1), 0 10px 10px -5px rgba(0, 153, 255, 0.04);
+      }
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-float {
+        animation: floating 3s ease-in-out infinite;
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #0099ff;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
         width: 100%;
-    }
-    
-    .navbar-links a {
-        padding: 1rem;
-        width: 100%;
-        text-align: center;
-        border-radius: 4px;
-    }
-    
-    /* Hamburger animation */
-    .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .menu-toggle.active .bar:nth-child(2) {
+      }
+      .fade-in {
         opacity: 0;
-    }
-    
-    .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-    
-</style>
-</head>
-<body>
-   
-
-    <!-- Notification Popup -->
-    <div class="notification-popup" id="notificationPopup">
-        <div class="notification-content">
-        <center><p><strong>🔥 New Drop Alert!</strong></p>
-            <p>SharpVision Merch is here,limited for our fans.</p>
-            <p> <b>Grab yours before it's gone!</p></b>
-        </center>
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* Mobile optimizations */
+      @media (max-width: 767px) {
+        .hero {
+          padding-top: 60px;
+          min-height: calc(100vh - 60px);
+        }
+        .hero h1 {
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+        .hero p {
+          font-size: 1rem;
+        }
+        .container {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .mobile-menu {
+          height: calc(100vh - 72px);
+          overflow-y: auto;
+        }
+        .game-card {
+          margin-bottom: 1.5rem;
+        }
+        .team-member {
+          margin-bottom: 1.5rem;
+        }
+        .contact-form {
+          padding: 1.5rem;
+        }
+        .footer-links {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .stat-item {
+          margin-bottom: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen">
+    <div class="loader fixed inset-0 flex items-center justify-center bg-gray-900/95 backdrop-blur-sm">
+        <div class="text-center">
+          <img
+            src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png"
+            alt="SharpVision Logo"
+            class="w-33 h-32 mx-auto mb-4 animate-float"
+          />
+          <span class="text-2xl font-bold text-white">SharpVision</span>
         </div>
-    </div>
+      </div>
 
-    <!-- Loading screen -->
-    <div class="loading" id="loading">
-        <a class="navbar-logo">
-            <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
-            <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
-        </a>
-        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="#ffffff" stroke-width="4">
-            <circle cx="25" cy="25" r="20" stroke-opacity="0.3"/>
-            <circle cx="25" cy="25" r="20" stroke-dasharray="125.664" stroke-dashoffset="125.664" stroke-linecap="round">
-                <animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" values="125.664;0;125.664" keyTimes="0;0.5;1"/>
-            </circle>
-        </svg>
-    </div>
- 
-
-    <header>
-        <nav class="navbar">
-            <div class="navbar-container">
-                <a class="navbar-logo">
-                    <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="navbar-logo-img">
-                    <span class="navbar-title"><b>Sharp</b><span>Vision</span></span>
-                </a>
-                
-                <!-- Add hamburger button -->
-                <button class="menu-toggle" id="mobile-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-    
-                <ul class="navbar-links" id="navbar-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li>
-                        <button class="notification-button" id="merchButton" onclick="toggleNotification()">
-                            <i class="fas fa-bell"></i>
-                            <span>Merch Drop Alert</span>
-                        </button>
-                    </li>
-                </ul>
+    <!-- Merch Modal -->
+    <div id="merchModal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm hidden z-50 overflow-y-auto">
+      <div class="relative max-w-2xl mx-auto my-8 bg-gradient-to-br from-gray-900/95 to-gray-800/95 rounded-2xl p-6 sm:p-8 shadow-2xl border border-gray-700">
+        <div class="flex flex-col space-y-6">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <span class="text-3xl font-bold text-primary">🔥</span>
+              <span class="text-2xl font-bold text-white">New Drop Alert!</span>
             </div>
-        </nav>
+            <button 
+              onclick="toggleMerchModal()"
+              class="text-white hover:text-primary transition-colors"
+            >
+              <i class="ri-close-line text-2xl"></i>
+            </button>
+          </div>
+          <div class="space-y-4">
+            <p class="text-lg text-gray-300">SharpVision Merch is here — limited edition gear for our true fans.</p>
+            <p class="text-lg text-gray-300">Grab yours before it's gone!</p>
+          </div>
+          <!-- Add your merch content here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Button -->
+    <div class="fixed top-20 left-0 z-40">
+      <button 
+        id="merchDrawerBtn"
+        class="flex items-center justify-between p-3 bg-primary rounded-r-lg border-r-4 border-white hover:bg-primary/90 transition-colors"
+        onclick="toggleMerchModal()"
+      >
+        <span class="text-white text-xl">🔥</span>
+        <span class="text-white font-bold hidden sm:inline">New Drop</span>
+      </button>
+    </div>  
+    <header
+      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div class="flex items-center justify-between">
+          <a href="#" class="flex items-center space-x-2">
+            <img
+              src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png"
+              alt="SharpVision Logo"
+              class="h-8"
+            />
+            <span class="text-xl font-bold">SharpVision</span>
+          </a>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#"
+              class="nav-link text-white hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="#games"
+              class="nav-link text-white hover:text-primary transition-colors"
+              >Games</a
+            >
+            <a
+              href="#team"
+              class="nav-link text-white hover:text-primary transition-colors"
+              >Team</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-white hover:text-primary transition-colors"
+              >Contact</a
+            >
+          </div>
+         <button
+  class="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-50"
+  id="mobile-menu-button"
+  aria-label="Toggle menu"
+>
+  <i class="ri-menu-line text-xl"></i>
+</button>
+        </div>
+      </div>
+      <div
+        class="md:hidden fixed top-[72px] left-0 right-0 bg-gray-900/95 backdrop-blur-sm transform transition-transform duration-300 -translate-y-full shadow-lg mobile-menu z-50"
+        id="mobile-menu"
+        style="height: calc(100vh - 72px); overflow-y: auto;"
+      >
+        <div class="container mx-auto px-4 sm:px-6 py-8">
+          <nav class="flex flex-col space-y-6">
+            <a
+              href="#"
+              class="text-lg font-medium text-white hover:text-primary transition-colors flex items-center"
+            >
+              <i class="ri-home-line mr-3"></i>Home
+            </a>
+            <a
+              href="#games"
+              class="text-lg font-medium text-white hover:text-primary transition-colors flex items-center"
+            >
+              <i class="ri-gamepad-line mr-3"></i>Games
+            </a>
+            <a
+              href="#team"
+              class="text-lg font-medium text-white hover:text-primary transition-colors flex items-center"
+            >
+              <i class="ri-team-line mr-3"></i>Team
+            </a>
+            <a
+              href="#contact"
+              class="text-lg font-medium text-white hover:text-primary transition-colors flex items-center"
+            >
+              <i class="ri-message-3-line mr-3"></i>Contact
+            </a>
+          </nav>
+          <div class="mt-12 pt-8 border-t border-gray-700">
+            <div class="flex justify-center space-x-6">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+              >
+                <i class="ri-discord-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+              >
+                <i class="ri-youtube-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
-    <section id="home" class="hero">
-          <!-- Notification Button -->
-   
-
-    <!-- Notification Popup -->
-    <div class="notification-popup" id="notificationPopup">
-        <div class="notification-content">
-            <p><strong>🔥 New Drop Alert!</strong></p>
-            <p>SharpVision Merch is here — limited for our fans.</p>
-            <p> <b>Grab yours before it's gone!</p></b>
-            <button class="close-btn" onclick="toggleNotification()">×</button>
-        </div>
-    </div>
-
-        <div class="hero">
-            <div class="hero-banner">
-                <img src="https://i.postimg.cc/tgtWLFdr/Def-Thumbnail-1.webp" alt="Banner Image" class="banner-img">
-            </div>
-            <div class="hero-text" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <h1 class="hero-heading">Crafting <span class="hero-highlight"> Enjoyable </span> Experiences on <span class="hero-highlight">Roblox</span></h1>
-                <p class="hero-description">
-                    SharpVision is at the forefront of creating <span class="hero-accent">immersive</span> and <span class="hero-accent">engaging</span> Roblox experiences.
-                </p>
-                <p class="hero-description">
-                    Focused on quality, community, and creativity — that's the <b>SharpVision</b> way.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn-primary">Join Us</a>
-                    <a href="#about" class="btn-secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
+    <section class="hero min-h-screen flex items-center relative">
+      <div class="hero-bg"></div>
+      <div class="container mx-auto px-4 sm:px-6 py-24 relative z-10 w-full">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center"
+          >
+            Crafting <span class="text-primary">Enjoyable</span><br class="hidden sm:block" />
+            Experiences on<br class="hidden sm:block" />
+            <span class="text-primary">Roblox</span>
+          </h1>
+          <p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
+            SharpVision is a small indie game studio with a big passion for making fun and memorable experiences on Roblox.
+          </p>
+          <p class="text-base sm:text-lg mb-10 text-gray-400 text-center">
+            Focused on quality, community, and creativity — that's the
+            SharpVision way.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 !rounded-button transition-all duration-300 flex items-center justify-center whitespace-nowrap inline-block">
+              Get Started
+            </a>
+            <button
+              class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-medium py-3 px-6 sm:px-8 !rounded-button transition-all duration-300 whitespace-nowrap"
+            >
+              Learn More
+            </button>
+          </div>
+         </div>
+      </div>
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 floating"
+      >
+      </div>
     </section>
-
-    <section id="contact" class="reveal">
-        <div class="contact-container">
-            <div class="contact-form">
-                <h2 class="section-heading">Let's <span>Connect</span></h2>
-                <p class="section-subheading">Reach out to us to discuss your project or join our community</p>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" class="form-control" rows="5" placeholder="Your message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary">Send Message</button>
-                </form>
-            </div>
-        
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <a href="#" class="footer-logo">SharpVision</a>
-                    <p class="footer-description">Creating next-generation gaming experiences on ROBLOX platform since 2025</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
-                        <a href="#" aria-label="Discord"><i class="ri-discord-fill"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="copyright">&copy; 2025 SharpVision. All rights reserved.</p>
-                <p class="footer-tagline" style="color: white;"><a href="https://rast0fx.github.io/Portfolio/">Made by Mhamad Koussa (rast0fx)</a></p>
-            </div>
-        </div>
-    </footer>
-
   
+    <section class="py-16 sm:py-20 bg-gray-800 relative overflow-hidden">
+      <div
+        class="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full opacity-5 transform translate-x-1/2 -translate-y-1/2"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 bg-blue-600 rounded-full opacity-5 transform -translate-x-1/2 translate-y-1/2"
+      ></div>
+      <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Join Our Discord Community
+          </h2>
+          <p class="text-lg text-gray-300 mb-8">
+            Connect with our developers and fellow players. Get early access to
+            updates, participate in events, and share your feedback.
+          </p>
+          <a href="https://discord.gg/sharpvision" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 !rounded-button transition-all duration-300 flex items-center justify-center whitespace-nowrap inline-block">
+              <i class="ri-discord-fill mr-2 ri-lg"></i>
+              Join Our Discord
+            </a>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="py-16 sm:py-20 bg-gray-900">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+          <div class="fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
+            <p class="text-gray-400 mb-8">
+              Have questions about our games or interested in collaborating?
+              Reach out to us using the contact form or through our social media
+              channels.
+            </p>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-lg mr-4"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold mb-1">Email</h3>
+                  <p class="text-gray-400">contact@sharpvision.dev</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-lg mr-4"
+                >
+                  <i class="ri-discord-line"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold mb-1">Discord</h3>
+                  <p class="text-gray-400">discord.gg/sharpvision</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-lg mr-4"
+                >
+                  <i class="ri-twitter-x-line"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold mb-1">Twitter</h3>
+                  <p class="text-gray-400">@SharpVisionDev</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 sm:mt-10">
+              <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                >
+                  <i class="ri-twitter-x-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                >
+                  <i class="ri-instagram-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                >
+                  <i class="ri-youtube-line"></i>
+                </a>
+                <a
+                  href="https://discord.gg/sharpvision"
+                  target="_blank"
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                >
+                  <i class="ri-discord-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                >
+                  <i class="ri-tiktok-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="fade-in">
+            <div class="bg-gray-800 rounded-lg p-6 sm:p-8 contact-form">
+              <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+              <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                  <div>
+                    <label
+                      for="name"
+                      class="block text-sm font-medium text-gray-400 mb-2"
+                      >Name</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      class="w-full bg-gray-700 border-none !rounded-button px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-sm font-medium text-gray-400 mb-2"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      class="w-full bg-gray-700 border-none !rounded-button px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none"
+                      placeholder="Your email"
+                    />
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="subject"
+                    class="block text-sm font-medium text-gray-400 mb-2"
+                    >Subject</label
+                  >
+                  <input
+                    type="text"
+                    id="subject"
+                    class="w-full bg-gray-700 border-none !rounded-button px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none"
+                    placeholder="Message subject"
+                  />
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-gray-400 mb-2"
+                    >Message</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="5"
+                    class="w-full bg-gray-700 border-none !rounded-button px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none resize-none"
+                    placeholder="Your message"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 !rounded-button transition-all duration-300 whitespace-nowrap"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-gray-800 py-12">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-8">
+          <div>
+            <a href="#" class="flex items-center space-x-2 mb-4">
+              <img
+                src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png"
+                alt="SharpVision Logo"
+                class="h-8"
+              />
+              <span class="text-xl font-bold">SharpVision</span>
+            </a>
+            <p class="text-gray-400 mb-6">
+              Creating immersive Roblox experiences that bring joy and
+              excitement to players around the world.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-6 sm:gap-8 footer-links">
+            <div>
+              <h3 class="text-lg font-bold mb-4">Links</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Home</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#games"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Games</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#team"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Team</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Contact</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold mb-4">Games</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Fantasy Frontier</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Neon Racers</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition-colors"
+                    >Mega Tycoon</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">
+            © 2025 SharpVision. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-gray-400 text-sm"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-500 hover:text-gray-400 text-sm"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
         // Loading screen
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loading').classList.add('hidden');
-                setTimeout(function() {
-                    document.getElementById('loading').style.display = 'none';
-                }, 500);
-            }, 1000);
-        });
+        const loader = document.querySelector(".loader");
+        setTimeout(function () {
+          loader.classList.add("hidden");
+          loader.style.display = "none";
+        }, 1500);
+        
+        // Modals
+        const joinModal = document.getElementById("joinModal");
+        const merchModal = document.getElementById("merchModal");
+        const joinUsBtn = document.getElementById("joinUsBtn");
+        const merchBtn = document.getElementById("merchDrawerBtn");
+        const closeModal = document.getElementById("closeModal");
+        const cancelBtn = document.getElementById("cancelBtn");
+        const joinForm = document.getElementById("joinForm");
+        const closeMerchModal = merchModal ? merchModal.querySelector("button") : null;
 
-        // Redirect to Home page on refresh
-        window.addEventListener('beforeunload', function() {
-            // Store the current page in localStorage
-            localStorage.setItem('lastPage', window.location.pathname);
-        });
+        // Modal toggle functions
+        function toggleModal() {
+          if (joinModal) joinModal.classList.toggle("hidden");
+        }
 
-        window.addEventListener('load', function() {
-            // Check if this is a refresh
-            const lastPage = localStorage.getItem('lastPage');
-            if (lastPage && lastPage !== window.location.pathname) {
-                // Redirect to Home page
-                window.location.href = '#home';
+        function toggleMerchModal() {
+          if (merchModal) {
+            merchModal.classList.toggle("hidden");
+          }
+        }
+
+        // Event listeners
+        if (joinUsBtn) joinUsBtn.addEventListener("click", toggleModal);
+        if (merchBtn) merchBtn.addEventListener("click", toggleMerchModal);
+        if (closeModal) closeModal.addEventListener("click", toggleModal);
+        if (cancelBtn) cancelBtn.addEventListener("click", toggleModal);
+        if (closeMerchModal) closeMerchModal.addEventListener("click", toggleMerchModal);
+
+        // Add click outside handlers
+        if (joinModal) {
+          joinModal.addEventListener("click", function (e) {
+            if (e.target === joinModal) {
+              toggleModal();
             }
-            // Clear the stored page
-            localStorage.removeItem('lastPage');
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (!targetElement) return;
-                
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                // Update URL without jumping
-                if (history.pushState) {
-                    history.pushState(null, null, targetId);
-                } else {
-                    location.hash = targetId;
-                }
-            });
-        });
-
-        // Scroll reveal animation
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            const windowHeight = window.innerHeight;
-            const revealPoint = 150;
-            
-            reveals.forEach(reveal => {
-                const revealTop = reveal.getBoundingClientRect().top;
-                
-                if (revealTop < windowHeight - revealPoint) {
-                    reveal.classList.add('active');
-                }
-            });
+          });
         }
 
-        // Trigger initially and on scroll
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
-
-        // Header scroll effect
-        const header = document.querySelector('header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(10, 13, 24, 0.9)';
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'rgba(10, 13, 24, 0.8)';
-                header.style.backdropFilter = 'blur(8px)';
-                header.style.boxShadow = 'none';
+        if (merchModal) {
+          merchModal.addEventListener("click", function (e) {
+            if (e.target === merchModal) {
+              toggleMerchModal();
             }
-        });
-
-        // Image slider functionality
-        const images = document.querySelectorAll('#imageContainer img');
-        let currentIndex = 0;
-        let shuffleInterval;
-        
-        function showImage(index) {
-            images.forEach(img => {
-                img.classList.remove('active', 'prev', 'next');
-            });
-            
-            const prevIndex = (index - 1 + images.length) % images.length;
-            const nextIndex = (index + 1) % images.length;
-            
-            images[index].classList.add('active');
-            images[prevIndex].classList.add('prev');
-            images[nextIndex].classList.add('next');
-        }
-        
-        function advanceSlide() {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        }
-        
-        function startShuffle() {
-            showImage(currentIndex);
-            clearInterval(shuffleInterval);
-            shuffleInterval = setInterval(advanceSlide, 3000);
-        }
-        
-        
-        window.addEventListener('load', startShuffle);
-        
-        
-        if (matchMedia('(hover: hover)').matches) {
-            const slider = document.getElementById('imageContainer');
-            
-            slider.addEventListener('mouseenter', () => {
-                clearInterval(shuffleInterval);
-            });
-            
-            slider.addEventListener('mouseleave', startShuffle);
+          });
         }
 
-        
-        const contactForm = document.getElementById('contact-form');
-        
-        contactForm.addEventListener('submit', async (e) => {
+        if (joinForm) {
+          joinForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            
-            const formData = new FormData(contactForm);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
-            };
-
-            try {
-                
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('There was an error submitting your message. Please try again.');
-            }
-        });
-
-        
-        function isTouchDevice() {
-            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-        }
-
-        if (isTouchDevice()) {
-            // Add touch-specific optimizations
-            document.documentElement.classList.add('touch-device');
-            
-            // Increase tap target sizes for mobile
-            document.querySelectorAll('a, button').forEach(el => {
-                el.style.minHeight = '44px';
-                el.style.minWidth = '44px';
-            });
-        }
-
-        // Reduced motion preference
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduceMotion) {
-            document.documentElement.classList.add('reduce-motion');
-        }
-        // Mobile Navbar Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const navbarLinks = document.getElementById('navbar-links');
-    menuToggle.addEventListener('click', () => {
-        navbarLinks.classList.toggle('active');
-        menuToggle.classList.toggle('open');
-        document.body.classList.toggle('menu-open');
-    });
-
-    // Close navbar when a link is clicked
-    document.querySelectorAll('.navbar-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navbarLinks.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.classList.remove('menu-open');
-        });
-    });
-
-    // Close navbar when clicking outside
-    document.addEventListener('click', (e) => {
-        const isMenuToggle = menuToggle.contains(e.target);
-        const isNavbarLinks = navbarLinks.contains(e.target);
-        if (!isMenuToggle && !isNavbarLinks && navbarLinks.classList.contains('active')) {
-            navbarLinks.classList.remove('active');
-            menuToggle.classList.remove('open');
-            document.body.classList.remove('menu-open');
-        }
-    });
-});
-    </script>
-
-<script>
-    function toggleNotification() {
-        const popup = document.getElementById('notificationPopup');
-        popup.classList.toggle('active');
-    }
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const merchButton = document.getElementById('merchButton');
-        const notificationPopup = document.getElementById('notificationPopup');
-        
-        merchButton.addEventListener('click', function() {
-            notificationPopup.classList.add('active');
+            const formData = new FormData(joinForm);
+            const data = Object.fromEntries(formData);
+            const successMessage = document.createElement("div");
+            successMessage.className =
+              "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
+            successMessage.textContent =
+              "Application submitted successfully! We'll contact you soon.";
+            document.body.appendChild(successMessage);
             setTimeout(() => {
-                notificationPopup.classList.remove('active');
-            }, 2000); // Hide after 3 seconds
-        });
-
-        // Close popup when clicking the close button
-        const closeBtn = notificationPopup.querySelector('.close-btn');
-        closeBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent click from reaching merch button
-            notificationPopup.classList.remove('active');
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navbarLinks = document.getElementById('navbar-links');
-
-    // Toggle mobile menu
-    mobileMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
-        mobileMenu.classList.toggle('active');
-        navbarLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (navbarLinks.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            navbarLinks.classList.remove('active');
+              successMessage.remove();
+              toggleModal();
+              joinForm.reset();
+            }, 3000);
+          });
         }
-    });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        let isMenuOpen = false;
+        
+        function toggleMenu() {
+          isMenuOpen = !isMenuOpen;
+          if (mobileMenu) {
+            mobileMenu.classList.toggle("-translate-y-full");
+          }
+          if (mobileMenuButton) {
+            const icon = mobileMenuButton.querySelector("i");
+            if (icon) {
+              icon.className = isMenuOpen
+                ? "ri-close-line text-xl"
+                : "ri-menu-line text-xl";
+            }
+          }
 
-    // Close menu when clicking links
-    document.querySelectorAll('.navbar-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            navbarLinks.classList.remove('active');
-        });
-    });
-});
-</script>
-</body>
+          if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+          } else {
+            document.body.style.overflow = "";
+          }
+        }
+        
+        if (mobileMenuButton) {
+          mobileMenuButton.addEventListener("click", toggleMenu);
+        }
+        
+        // Close menu when clicking menu items
+        if (mobileMenu) {
+          const menuItems = mobileMenu.getElementsByTagName("a");
+          Array.from(menuItems).forEach((item) => {
+            item.addEventListener("click", () => {
+              if (isMenuOpen) {
+                toggleMenu();
+              }
+            });
+          });
+        }
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById("navbar");
+        if (navbar) {
+          window.addEventListener("scroll", function () {
+            if (window.scrollY > 50) {
+              navbar.classList.add("bg-gray-900", "shadow-lg");
+              navbar.classList.remove("bg-transparent");
+            } else {
+              navbar.classList.remove("bg-gray-900", "shadow-lg");
+              navbar.classList.add("bg-transparent");
+            }
+          });
+          // Trigger scroll event on page load
+          window.dispatchEvent(new Event("scroll"));
+        }
+        
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const fadeInOnScroll = function () {
+          fadeElements.forEach((element) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            if (elementTop < window.innerHeight - elementVisible) {
+              element.classList.add("visible");
+              if (!element.dataset.animated) {
+                animateStats();
+                element.dataset.animated = "true";
+              }
+            }
+          });
+        };
+        
+        window.addEventListener("scroll", fadeInOnScroll);
+        // Trigger on initial load
+        fadeInOnScroll();
+        
+        // Stats animation
+        function animateStats() {
+          const stats = document.querySelectorAll(".stat-number");
+          stats.forEach((stat) => {
+            const target = parseFloat(stat.dataset.target);
+            const suffix = stat.dataset.suffix || "";
+            const duration = 2000;
+            const steps = 50;
+            const increment = target / steps;
+            let current = 0;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                current = target;
+                clearInterval(timer);
+              }
+              stat.textContent = current.toFixed(1).replace(".0", "") + suffix;
+            }, duration / steps);
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
