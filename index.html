@@ -182,16 +182,12 @@
             left: 0;
         }
         .merch-alert {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
-            padding: 14px 24px;
-            border-radius: 50px;
+            padding: 12px 20px;
+            border-radius: 8px;
             font-weight: 600;
             box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
-            animation: float 3s ease-in-out infinite;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 40;
@@ -202,9 +198,11 @@
             outline: none;
             -webkit-tap-highlight-color: transparent;
         }
-        .merch-alert:active {
-            transform: scale(0.96) translateY(2px);
-            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.2);
+        .merch-alert.hero-sticky {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -221,30 +219,17 @@
                 right: 1rem;
                 top: 1rem;
             }
+            .merch-alert.hero-sticky {
+                bottom: 20px;
+                right: 15px;
+                padding: 16px 24px;
+                border-radius: 50px;
+            }
             .nav-links li {
                 margin: 1.5rem 0;
             }
             .nav-links a {
                 font-size: 1.5rem;
-            }
-            .merch-alert {
-                bottom: 20px;
-                right: 15px;
-                left: auto;
-                width: auto;
-                max-width: calc(100% - 30px);
-                text-align: center;
-                justify-content: center;
-                padding: 16px 24px;
-                font-size: 15px;
-                border-radius: 50px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .merch-alert i {
-                font-size: 1.2em;
-                margin-right: 4px;
             }
         }
     </style>
@@ -257,12 +242,6 @@
             <span class="text-2xl font-bold text-white">SharpVision</span>
         </div>
     </div>
-
-    <!-- Merch Alert -->
-    <button class="merch-alert" onclick="toggleMerchModal()" aria-label="View new merchandise">
-        <i class="ri-fire-fill"></i>
-        <span>New Merch Drop!</span>
-    </button>
 
     <!-- Merch Modal -->
     <div id="merchModal" class="fixed inset-0 z-50 hidden merch-modal overflow-y-auto">
@@ -310,18 +289,21 @@
                         <li><a href="#team" class="text-white hover:text-primary transition-colors font-medium">Team</a></li>
                         <li><a href="#contact" class="text-white hover:text-primary transition-colors font-medium">Contact</a></li>
                     </ul>
-            
                 </div>
                 
                 <!-- Mobile Menu -->
                 <div class="fixed inset-0 bg-gray-900/95 z-40 flex flex-col items-center justify-center transition-all duration-300 transform translate-x-full md:hidden" id="mobileMenu">
-                   
-                    <ul class="text-center space-y-8">
+                    <ul class="text-center space-y-6">
                         <li><a href="#" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Home</a></li>
                         <li><a href="#games" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Games</a></li>
+                        <li class="mt-8">
+                            <button class="w-full max-w-xs mx-auto bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2 merch-modal-trigger">
+                                <i class="ri-fire-fill"></i>
+                                <span>New Merch Drop!</span>
+                            </button>
+                        </li>
                         <li><a href="#team" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Team</a></li>
                         <li><a href="#contact" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Contact</a></li>
-                  
                     </ul>
                 </div>
 
@@ -337,6 +319,11 @@
     <!-- Hero Section -->
     <section class="hero min-h-screen flex items-center relative">
         <div class="hero-bg"></div>
+        <button class="merch-alert hero-sticky hidden md:flex" onclick="toggleMerchModal()" aria-label="View new merchandise">
+            <i class="ri-fire-fill"></i>
+            <span>New Merch Drop!</span>
+        </button>
+        
         <div class="container mx-auto px-4 sm:px-6 py-24 relative z-10 w-full">
             <div class="max-w-3xl mx-auto text-center">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center">
@@ -347,7 +334,7 @@
                 <p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
                     SharpVision is a small indie game studio with a big passion for making fun and memorable experiences on Roblox.
                 </p>
-<p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
+                <p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
                     Focused on quality, community, and creativity — that’s the SharpVision way.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -498,28 +485,20 @@
             }, 1500);
 
             // Hamburger Menu
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const navbar = document.querySelector('.navbar');
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
 
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-                navbar.classList.toggle('menu-active');
-                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
-            });
+            hamburger.addEventListener('click', toggleMobileMenu);
 
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    navbar.classList.remove('menu-active');
-                    document.body.style.overflow = 'auto';
-                });
+            // Mobile menu links click handler
+            const mobileMenuLinks = document.querySelectorAll('#mobileMenu a, #mobileMenu button');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
             });
 
             // Navbar Scroll Effect
             window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
                 if (window.scrollY > 50) {
                     navbar.classList.add('bg-gray-900', 'shadow-lg');
                     navbar.classList.remove('bg-transparent');
@@ -545,34 +524,50 @@
         });
 
         // Merch Modal
-        function toggleMerchModal() {
+        function toggleMerchModal(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const modal = document.getElementById('merchModal');
             modal.classList.toggle('hidden');
         }
 
-        // Mobile menu functionality
-        const hamburger = document.getElementById('hamburger');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.querySelectorAll('#mobileMenu a');
+        // Add event listener for merch modal triggers
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle mobile menu merch button
+            const merchButtons = document.querySelectorAll('.merch-modal-trigger, .merch-alert');
+            merchButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMobileMenu();
+                    }
+                    // Open merch modal
+                    toggleMerchModal(e);
+                });
+            });
+        });
 
-        // Toggle mobile menu
+        // Mobile menu functionality
         function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('translate-x-full');
             document.body.style.overflow = mobileMenu.classList.contains('translate-x-full') ? 'auto' : 'hidden';
         }
 
-        // Event listeners
-        hamburger.addEventListener('click', toggleMobileMenu);
-        closeMobileMenu.addEventListener('click', toggleMobileMenu);
-
-        // Close mobile menu when clicking on a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileMenu && !mobileMenu.classList.contains('translate-x-full')) {
-                    toggleMobileMenu();
+        // Close when clicking outside mobile menu
+        document.addEventListener('click', (e) => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            
+            if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
+                if (!mobileMenu.classList.contains('translate-x-full')) {
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.style.overflow = 'auto';
                 }
-            });
+            }
         });
 
         // Close modal when clicking outside
