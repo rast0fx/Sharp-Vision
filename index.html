@@ -32,6 +32,70 @@
         };
     </script>
     <style>
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Account for fixed navbar */
+        }
+
+        /* Scroll snap for sections */
+        section {
+            scroll-snap-align: start;
+            scroll-margin-top: 80px; /* Account for fixed navbar */
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0099ff;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0077cc;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 153, 255, 0.8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: none;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: #0077cc;
+            transform: translateY(-3px);
+        }
+
         .loader {
             position: fixed;
             top: 0;
@@ -69,7 +133,7 @@
             background-image: url('https://i.postimg.cc/WbgHpTs4/noFilter.webp');
             background-size: cover;
             background-position: center;
-            filter: blur(4px);
+            filter: blur(3.5px);
             z-index: 0;
         }
         .hero::before {
@@ -541,6 +605,64 @@
             };
             window.addEventListener('scroll', fadeInOnScroll);
             fadeInOnScroll();
+            
+            // Scroll to top button
+            const scrollToTopBtn = document.createElement('button');
+            scrollToTopBtn.className = 'scroll-to-top';
+            scrollToTopBtn.innerHTML = '↑';
+            scrollToTopBtn.title = 'Scroll to top';
+            document.body.appendChild(scrollToTopBtn);
+
+            // Show/hide scroll to top button
+            function toggleScrollToTop() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            }
+
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Account for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+
+            // Scroll to top functionality
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Initial check for scroll position
+            toggleScrollToTop();
+            
+            // Update scroll position on scroll
+            let isScrolling;
+            window.addEventListener('scroll', () => {
+                // Clear our timeout throughout the scroll
+                window.clearTimeout(isScrolling);
+                
+                // Set a timeout to run after scrolling ends
+                isScrolling = setTimeout(() => {
+                    toggleScrollToTop();
+                }, 66); // 60fps = 16.67ms per frame, so 4 frames = ~66ms
+            }, false);
     
             // Form handling
             const contactForm = document.getElementById('contactForm');
