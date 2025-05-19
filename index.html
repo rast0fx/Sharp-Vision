@@ -277,7 +277,7 @@
     <nav class="navbar fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
             <div class="flex items-center justify-between">
-                <a class="flex items-center space-x-2">
+                <a href="#" class="flex items-center space-x-2">
                     <img src="https://i.postimg.cc/4y5C7WZf/image-removebg-preview-1.png" alt="SharpVision Logo" class="h-8">
                     <span class="text-xl font-bold">SharpVision</span>
                 </a>
@@ -292,7 +292,7 @@
                 </div>
                 
                 <!-- Mobile Menu -->
-                <div class="fixed inset-0 bg-gray-900/95 z-40 flex flex-col items-center justify-center transition-all duration-300 transform translate-x-full md:hidden" id="mobileMenu">
+                <div class="fixed inset-0 bg-gray-900/95 z-40 flex flex-col items-center justify-center transition-all duration-300 transform translate-x-full md:hidden" id="mobileMenu" aria-hidden="true">
                     <ul class="text-center space-y-6">
                         <li><a href="#" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Home</a></li>
                         <li><a href="#games" class="text-2xl font-medium hover:text-primary transition-colors block py-2">Games</a></li>
@@ -307,7 +307,7 @@
                     </ul>
                 </div>
 
-                <button class="hamburger md:hidden" id="hamburger">
+                <button class="hamburger md:hidden" id="hamburger" onclick="toggleMobileMenu()" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="mobileMenu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -319,7 +319,7 @@
     <!-- Hero Section -->
     <section class="hero min-h-screen flex items-center relative">
         <div class="hero-bg"></div>
-        <button class="merch-alert hero-sticky hidden md:flex" onclick="toggleMerchModal()" aria-label="View new merchandise">
+        <button class="merch-alert hero-sticky hidden md:flex merch-modal-trigger" onclick="toggleMerchModal()" aria-label="View new merchandise">
             <i class="ri-fire-fill"></i>
             <span>New Merch Drop!</span>
         </button>
@@ -338,12 +338,12 @@
                     Focused on quality, community, and creativity — that’s the SharpVision way.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                    <a href="#contact" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
                         Get Started
                     </a>
-                    <button class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300">
+                    <a href="#games" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300">
                         Learn More
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -403,23 +403,25 @@
                 <div class="fade-in">
                     <div class="bg-gray-800 rounded-lg p-6 sm:p-8">
                         <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
-                        <form>
+                        <form id="contactForm" action="#" method="POST" novalidate>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
                                 <div>
                                     <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                                    <input type="text" id="name" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Your name">
+                                    <input type="text" id="name" name="name" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Your name" required minlength="2" aria-required="true">
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                                    <input type="email" id="email" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Your email">
+                                    <input type="email" id="email" name="email" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Your email" required aria-required="true">
                                 </div>
                             </div>
                             <div class="mb-6">
                                 <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                                <textarea id="message" rows="5" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none resize-none" placeholder="Your message"></textarea>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-gray-700 border-none rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-primary focus:outline-none resize-none" placeholder="Your message" required minlength="10" aria-required="true"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
-                                Send Message
+                            <div class="form-errors text-red-400 text-sm mb-4 hidden"></div>
+                            <button type="submit" class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300" aria-live="polite">
+                                <span class="submit-text">Send Message</span>
+                                <span class="loading hidden">Sending...</span>
                             </button>
                         </form>
                     </div>
@@ -483,21 +485,38 @@
                 loader.classList.add("hidden");
                 loader.style.display = "none";
             }, 1500);
-
-            // Hamburger Menu
-            const hamburger = document.getElementById('hamburger');
+    
+            // Initialize mobile menu state
             const mobileMenu = document.getElementById('mobileMenu');
-
-            hamburger.addEventListener('click', toggleMobileMenu);
-
+            const hamburger = document.getElementById('hamburger');
+            
+            // Mobile menu functionality
+            window.toggleMobileMenu = function() {
+                hamburger.classList.toggle('active');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                mobileMenu.classList.toggle('translate-x-full');
+                mobileMenu.setAttribute('aria-hidden', !isExpanded);
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                document.body.style.overflow = !isExpanded ? 'hidden' : 'auto';
+            };
+    
             // Mobile menu links click handler
-            const mobileMenuLinks = document.querySelectorAll('#mobileMenu a, #mobileMenu button');
+            const mobileMenuLinks = document.querySelectorAll('#mobileMenu a:not(.merch-modal-trigger)');
             mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', toggleMobileMenu);
+                link.addEventListener('click', () => {
+                    toggleMobileMenu();
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const element = document.querySelector(href);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
             });
-
+    
             // Navbar Scroll Effect
-            window.addEventListener('scroll', () => {
+            function handleScroll() {
                 const navbar = document.getElementById('navbar');
                 if (window.scrollY > 50) {
                     navbar.classList.add('bg-gray-900', 'shadow-lg');
@@ -506,9 +525,10 @@
                     navbar.classList.remove('bg-gray-900', 'shadow-lg');
                     navbar.classList.add('bg-transparent');
                 }
-            });
-            window.dispatchEvent(new Event('scroll'));
-
+            }
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+    
             // Fade-in Animation
             const fadeElements = document.querySelectorAll('.fade-in');
             const fadeInOnScroll = () => {
@@ -521,61 +541,105 @@
             };
             window.addEventListener('scroll', fadeInOnScroll);
             fadeInOnScroll();
-        });
-
-        // Merch Modal
-        function toggleMerchModal(e) {
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
+    
+            // Form handling
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Reset previous errors
+                    const errorContainer = this.querySelector('.form-errors');
+                    errorContainer.classList.add('hidden');
+                    errorContainer.textContent = '';
+                    
+                    // Show loading state
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const submitText = submitBtn.querySelector('.submit-text');
+                    const loadingText = submitBtn.querySelector('.loading');
+                    submitText.classList.add('hidden');
+                    loadingText.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Simulate form submission
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Show success message
+                        alert('Thank you for your message! We will get back to you soon.');
+                        this.reset();
+                    } catch (error) {
+                        // Show error message
+                        errorContainer.textContent = 'Failed to send message. Please try again later.';
+                        errorContainer.classList.remove('hidden');
+                    } finally {
+                        // Reset button state
+                        submitText.classList.remove('hidden');
+                        loadingText.classList.add('hidden');
+                        submitBtn.disabled = false;
+                    }
+                });
             }
+            
+            // Merch Modal
             const modal = document.getElementById('merchModal');
-            modal.classList.toggle('hidden');
-        }
-
-        // Add event listener for merch modal triggers
-        document.addEventListener('DOMContentLoaded', () => {
-            // Handle mobile menu merch button
-            const merchButtons = document.querySelectorAll('.merch-modal-trigger, .merch-alert');
-            merchButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobileMenu');
+            
+            // Merch Modal Toggle Function
+            function toggleMerchModal() {
+                const isHidden = modal.classList.contains('hidden');
+                if (isHidden) {
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+                modal.setAttribute('aria-hidden', !isHidden);
+            }
+            
+            // Add event listeners for all merch buttons
+            document.querySelectorAll('.merch-modal-trigger, .merch-alert').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     if (!mobileMenu.classList.contains('translate-x-full')) {
                         toggleMobileMenu();
                     }
-                    // Open merch modal
-                    toggleMerchModal(e);
+                    toggleMerchModal();
                 });
             });
-        });
-
-        // Mobile menu functionality
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('translate-x-full');
-            document.body.style.overflow = mobileMenu.classList.contains('translate-x-full') ? 'auto' : 'hidden';
-        }
-
-        // Close when clicking outside mobile menu
-        document.addEventListener('click', (e) => {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.getElementById('hamburger');
             
-            if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
-                if (!mobileMenu.classList.contains('translate-x-full')) {
-                    mobileMenu.classList.add('translate-x-full');
-                    document.body.style.overflow = 'auto';
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (!modal.classList.contains('hidden')) {
+                        toggleMerchModal();
+                    }
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMobileMenu();
+                    }
                 }
-            }
-        });
+            });
 
-        // Close modal when clicking outside
-        document.addEventListener('click', (e) => {
-            const modal = document.getElementById('merchModal');
-            if (modal && !modal.contains(e.target) && !document.querySelector('.merch-alert').contains(e.target)) {
-                modal.classList.add('hidden');
-            }
+            
+    
+            // Close when clicking outside
+            document.addEventListener('click', function(e) {
+                // Close mobile menu when clicking outside
+                if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMobileMenu();
+                    }
+                }
+                
+                // Close modal when clicking outside
+                if (modal && !modal.classList.contains('hidden')) {
+                    const modalContent = modal.querySelector('.max-w-md');
+                    if (!modalContent.contains(e.target) && !e.target.closest('.merch-modal-trigger')) {
+                        toggleMerchModal();
+                    }
+                }
+            });
         });
     </script>
 </body>
