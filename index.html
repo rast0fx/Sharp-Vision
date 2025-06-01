@@ -381,33 +381,72 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero min-h-screen flex items-center relative">
+    <section id="home" class="hero min-h-screen flex items-center justify-center relative">
         <div class="hero-bg"></div>
         <button class="merch-alert merch-modal-trigger hero-sticky hidden md:flex" aria-label="View new merchandise">
             <i class="ri-fire-fill"></i>
             <span>New Merch Drop!</span>
         </button>
         
-        <div class="container mx-auto px-4 sm:px-6 py-24 relative z-10 w-full">
-            <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center">
-                    Crafting <span class="text-primary">Enjoyable</span><br class="hidden sm:block">
-                    Experiences on<br class="hidden sm:block">
-                    <span class="text-primary">Roblox</span>
-                </h1>
-                <p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
-                    SharpVision is a small indie game studio with a big passion for making fun and memorable experiences on Roblox.
-                </p>
-                <p class="text-lg sm:text-xl mb-8 text-gray-300 text-center">
-                    Focused on quality, community, and creativity — that’s the SharpVision way.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
-                        Get Started
-                    </a>
-                    <a href="#games" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300">
-                        Learn More
-                    </a>
+        <div class="container mx-auto px-4 sm:px-6 py-12 relative z-10 w-full">
+            <div class="max-w-4xl mx-auto">
+                <!-- Text Content -->
+                <div class="text-center mb-8 sm:mb-12 px-2">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-snug sm:leading-tight">
+                        <div class="space-y-0 sm:space-y-1">
+                            <div class="leading-tight">Crafting <span class="text-primary">Enjoyable</span></div>
+                            <div class="leading-tight">Experiences on</div>
+                            <div class="text-primary leading-tight">Roblox</div>
+                        </div>
+                    </h1>
+                    <p class="text-base sm:text-lg md:text-xl mt-4 sm:mt-6 text-gray-300 leading-relaxed">
+                        SharpVision is a small indie game studio with a big passion for making fun and memorable experiences on Roblox.
+                    </p>
+                    <p class="text-base sm:text-lg md:text-xl mt-3 sm:mt-4 text-gray-300 leading-relaxed">
+                        Focused on quality, community, and creativity — that's the SharpVision way.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 sm:mt-10 mb-8 sm:mb-12 px-2">
+                        <a href="#contact" class="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                            Get Started
+                        </a>
+                        <a href="#games" class="bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-medium py-3 px-6 sm:px-8 rounded-lg transition-all duration-300">
+                            Learn More
+                        </a>
+                    </div>
+                    
+                 
+                    
+                    <!-- Stats Counters (Below Buttons) -->
+                    <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto mt-8 sm:mt-12 px-2 sm:px-6">
+                        <!-- Single column for mobile, 3 columns for sm+ -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-4">
+                            <!-- Visits Counter -->
+                            <div class="flex flex-col items-center py-3 sm:py-0">
+                                <div class="mb-2 sm:mb-3">
+                                <img src="https://i.postimg.cc/C100Tqxz/image.png" alt="Visits" class="h-10 sm:h-12 md:h-14 w-auto">
+                            </div>
+                                <span class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 sm:mb-3" id="visitsCounter">0</span>
+                                <span class="text-base sm:text-lg font-bold uppercase tracking-wide text-white text-center leading-snug px-1">Enough Visits to Fill 70 Stadiums!</span>
+                            </div>
+                            
+                            <!-- Community Counter -->
+                            <div class="flex flex-col items-center py-3 sm:py-0">
+                                <div class="mb-2 sm:mb-3">
+                                    <img src="https://i.postimg.cc/LX2c0FxP/Members-Icon.webp" alt="Community" class="h-10 sm:h-12 md:h-14 w-auto">
+                                </div>
+                                <span class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 sm:mb-3" id="communityCounter">0</span>
+                                <span class="text-base sm:text-lg font-bold uppercase tracking-wide text-white text-center leading-snug px-1">Big Enough to Start a Country</span>
+                            </div>
+                            
+                            <!-- Player Count Counter -->
+                            <div class="flex flex-col items-center py-3 sm:py-0">
+                                <div class="mb-2 sm:mb-3">
+                                    <img src="https://i.postimg.cc/J40LLmMc/CCUIcon.webp" alt="Players" class="h-10 sm:h-12 md:h-14 w-auto">
+                                </div>
+                                <span class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 sm:mb-3" id="playerCounter">0</span>
+                                <span class="text-base sm:text-lg font-bold uppercase tracking-wide text-white text-center leading-snug px-1">Live Humans in Our Worlds</span>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -419,7 +458,7 @@
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-600 rounded-full opacity-5 transform -translate-x-1/2 translate-y-1/2"></div>
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Our Community</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Servers</h2>
                 <p class="text-lg text-gray-300 mb-8">
                     Connect with our developers and fellow players. Get early access to
                     updates, participate in events, and share your feedback.
@@ -712,6 +751,11 @@
     setTimeout(() => {
         loader.classList.add("hidden");
         loader.style.display = "none";
+        
+        // Start the counter animations after loader is hidden
+        animateCounter('visitsCounter', 5782340, 1000);
+        animateCounter('communityCounter', 4536870, 1000);
+        animateCounter('playerCounter', 40300000, 1000);
     }, 1500);
 
     // Initialize mobile menu state
@@ -926,6 +970,29 @@
             }
         }
     });
+
+    // Member Counter Animation
+    function animateCounter(targetElement, finalValue, duration = 2000) {
+        const counter = document.getElementById(targetElement);
+        if (!counter) return;
+        
+        let startValue = 0;
+        const increment = Math.ceil(finalValue / 100);
+        const stepTime = Math.abs(Math.floor(duration / 100));
+        
+        const timer = setInterval(() => {
+            startValue += increment;
+            counter.textContent = startValue.toLocaleString();
+            
+            if (startValue >= finalValue) {
+                counter.textContent = finalValue.toLocaleString();
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+    
+    // Remove this line as we're now calling it after the loader is hidden
+    // animateCounter('memberCounter', 4536870, 1000);
 });
     </script>
 </body>
