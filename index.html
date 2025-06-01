@@ -32,6 +32,29 @@
         };
     </script>
     <style>
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 15s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
         /* Smooth scrolling for the entire page */
         html {
             scroll-behavior: smooth;
@@ -414,8 +437,7 @@
                         </a>
                     </div>
                     
-                 
-                    
+                
                     <!-- Stats Counters (Below Buttons) -->
                     <div class="grid grid-cols-1 gap-6 max-w-4xl mx-auto mt-8 sm:mt-12 px-2 sm:px-6">
                         <!-- Single column for mobile, 3 columns for sm+ -->
@@ -475,7 +497,17 @@
         </div>
     </section>
 
-    <section id="games" class="py-20 bg-gray-900">
+    <section id="games" class="py-20 relative overflow-hidden">
+        <!-- 3D Gradient Background -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900/95 to-gray-900"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.2),rgba(0,0,0,0))]"></div>
+            <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <!-- Animated gradient elements -->
+            <div class="absolute -top-1/2 left-1/4 w-full max-w-2xl h-[500px] bg-gradient-to-r from-indigo-500/20 to-pink-500/20 rounded-full mix-blend-soft-light blur-3xl animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-1/4 right-1/4 w-full max-w-2xl h-[500px] bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-full mix-blend-soft-light blur-3xl animate-blob animation-delay-4000"></div>
+            <div class="absolute top-1/2 left-1/2 w-full max-w-3xl h-[600px] bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full mix-blend-soft-light blur-3xl animate-blob"></div>
+        </div>
         <div class="container mx-auto px-6">
           <div class="text-center mb-16 fade-in">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Games</h2>
@@ -556,7 +588,7 @@
                 </div>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-bold mb-2">Let's Mic!</h3>
+                <h3 class="text-xl font-bold mb-2">🎙️ Let's Mic!</h3>
                 <p class="text-gray-400 mb-4">
                     Let's Mic is a chill hangout game on Roblox where you can grab the mic, perform, and just vibe with your friends.
                 </p>
@@ -578,12 +610,12 @@
         </div>
         <!-- Upcoming Games Section -->
         <div class="mt-20 fade-in">
-            <h3 class="text-2xl font-bold mb-6 text-center">Upcoming Games</h3>
-            <p class="text-gray-400 max-w-2xl mx-auto text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Upcoming Games</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-center mb-12">
               Get excited for these new experiences coming soon to SharpVision. Be the first to play!
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
               <div class="game-card bg-gray-800 rounded-lg overflow-hidden border border-primary/20 hover:border-primary/50 transition-all">
                 <div class="h-48 bg-gray-700 relative">
                   <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-gray-800 flex items-center justify-center">
@@ -593,12 +625,12 @@
                     COMING SOON
                   </div>
                 </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2">Mystery Adventure</h3>
-                  <p class="text-gray-400 mb-4">
+                <div class="p-4 sm:p-5">
+                  <h3 class="text-lg font-bold mb-1.5">Mystery Adventure</h3>
+                  <p class="text-sm text-gray-400 mb-3">
                     Explore hidden temples, solve ancient puzzles, and uncover treasures in this exciting adventure game.
                   </p>
-                  <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                  <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-700">
                     <div class="flex items-center text-sm text-gray-400">
                       <i class="ri-calendar-line mr-1"></i>
                       <span>Q3 2023</span>
@@ -617,9 +649,9 @@
                     IN DEVELOPMENT
                   </div>
                 </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2">Battle Arena</h3>
-                  <p class="text-gray-400 mb-4">
+                <div class="p-4 sm:p-5">
+                  <h3 class="text-lg font-bold mb-1.5">Battle Arena</h3>
+                  <p class="text-sm text-gray-400 mb-3">
                     Compete against players worldwide in this fast-paced multiplayer battle arena with unique character abilities.
                   </p>
                   <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
@@ -641,13 +673,13 @@
                     EARLY CONCEPT
                   </div>
                 </div>
-                <div class="p-6">
-                  <h3 class="text-xl font-bold mb-2">City Builder</h3>
-                  <p class="text-gray-400 mb-4">
+                <div class="p-3 sm:p-4">
+                  <h3 class="text-md font-bold mb-1">Space Explorers</h3>
+                  <p class="text-xs text-gray-400 mb-2">
                     Design, build, and manage your own virtual city with advanced simulation mechanics and creative freedom.
                   </p>
                   <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
-                    <div class="flex items-center text-sm text-gray-400">
+                    <div class="flex items-center text-xs text-gray-400">
                       <i class="ri-calendar-line mr-1"></i>
                       <span>2024</span>
                     </div>
